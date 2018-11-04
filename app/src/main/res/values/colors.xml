@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Light colors-->
+    <color name="tlight_primary">#2196F3</color>
+    <color name="tlight_primary_dark">#1976D2</color>
+    <color name="tlight_primary_light">#BBDEFB</color>
+    <color name="tlight_accent">#607D8B</color>
+    <color name="tlight_primary_text">#212121</color>
+    <color name="tlight_secondary_text">#757575</color>
+    <color name="tlight_icons">#FFFFFF</color>
+    <color name="tlight_divider">#BDBDBD</color>
+    <color name="tlight_background">#FFFFFF</color>
+    
+    <!--Dark colors-->
+    
+</resources>

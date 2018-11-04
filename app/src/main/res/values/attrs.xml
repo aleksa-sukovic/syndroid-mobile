@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="syndroid_theme">
+        <attr name="primary" format="color">#2196F3</attr>
+        <attr name="primary_dark" format="color">#1976D2</attr>
+        <attr name="primary_light" format="color">#BBDEFB</attr>
+        <attr name="accent" format="color">#607D8B</attr>
+        <attr name="primary_text" format="color">#212121</attr>
+        <attr name="secondary_text" format="color">#757575</attr>
+        <attr name="icons" format="color">#FFFFFF</attr>
+        <attr name="divider" format="color">#BDBDBD</attr>
+    </declare-styleable>
+</resources>
