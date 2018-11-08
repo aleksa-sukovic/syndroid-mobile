@@ -4,7 +4,7 @@
     <color name="tlight_primary">#2196F3</color>
     <color name="tlight_primary_dark">#1976D2</color>
     <color name="tlight_primary_light">#BBDEFB</color>
-    <color name="tlight_accent">#607D8B</color>
+    <color name="tlight_accent">#48C6FF</color>
     <color name="tlight_primary_text">#212121</color>
     <color name="tlight_secondary_text">#757575</color>
     <color name="tlight_icons">#FFFFFF</color>
@@ -12,5 +12,13 @@
     <color name="tlight_background">#FFFFFF</color>
     
     <!--Dark colors-->
-    
+    <color name="tdark_primary">#5C6569</color>
+    <color name="tdark_primary_dark">#3B4245</color>
+    <color name="tdark_primary_light">#A0B2BA</color>
+    <color name="tdark_accent">#6D8FAA</color>
+    <color name="tdark_primary_text">#FFFFFF</color>
+    <color name="tdark_secondary_text">#DEDEDE</color>
+    <color name="tdark_icons">#FFFFFF</color>
+    <color name="tdark_divider">#CDCDCD</color>
+    <color name="tdark_background">#8E989D</color>
 </resources>

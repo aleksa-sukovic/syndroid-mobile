@@ -1,7 +1,7 @@
 <resources>
     
     <!-- Light base application theme. -->
-    <style name="LightBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ActivityTheme.Primary.Base.Light" parent="Theme.AppCompat.NoActionBar">
         <!--System coloring-->
         <item name="colorPrimary">@color/tlight_primary</item>
         <item name="colorPrimaryDark">@color/tlight_primary_dark</item>
@@ -16,14 +16,30 @@
         <item name="secondary_text">@color/tlight_secondary_text</item>
         <item name="icons">@color/tlight_icons</item>
         <item name="divider">@color/tlight_divider</item>
+        <item name="background">@color/tlight_background</item>
     </style>
     
     <!-- Dark base application theme. -->
-    <style name="DarkBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ActivityTheme.Primary.Base.Dark" parent="Theme.AppCompat.NoActionBar">
         <!--System coloring-->
-        <item name="colorPrimary">@android:color/darker_gray</item>
-        <item name="colorPrimaryDark">@android:color/black</item>
-        <item name="colorAccent">@android:color/holo_orange_dark</item>
+        <item name="colorPrimary">@color/tdark_primary</item>
+        <item name="colorPrimaryDark">@color/tdark_primary_dark</item>
+        <item name="colorAccent">@color/tdark_accent</item>
+    
+        <!--Color scheme-->
+        <item name="primary">@color/tdark_primary</item>
+        <item name="primary_dark">@color/tdark_primary_dark</item>
+        <item name="primary_light">@color/tdark_primary_light</item>
+        <item name="accent">@color/tdark_accent</item>
+        <item name="primary_text">@color/tdark_primary_text</item>
+        <item name="secondary_text">@color/tdark_secondary_text</item>
+        <item name="icons">@color/tdark_icons</item>
+        <item name="divider">@color/tdark_divider</item>
+        <item name="background">@color/tdark_background</item>
     </style>
+    
+    <!--Connect Activity-->
+    <style name="ConnectActivityLight" parent="ActivityTheme.Primary.Base.Light" />
+    <style name="ConnectActivityDark"  parent="ActivityTheme.Primary.Base.Dark" />
     
 </resources>
