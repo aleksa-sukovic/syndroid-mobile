@@ -17,6 +17,9 @@
         <item name="icons">@color/tlight_icons</item>
         <item name="divider">@color/tlight_divider</item>
         <item name="background">@color/tlight_background</item>
+        
+        <!--Drawables-->
+        <item name="connect_btn">@drawable/ic_connect_btn_light</item>
     </style>
     
     <!-- Dark base application theme. -->
@@ -36,6 +39,9 @@
         <item name="icons">@color/tdark_icons</item>
         <item name="divider">@color/tdark_divider</item>
         <item name="background">@color/tdark_background</item>
+        
+        <!--Drawables-->
+        <item name="connect_btn">@drawable/ic_connect_btn_dark</item>
     </style>
     
     <!--Connect Activity-->
