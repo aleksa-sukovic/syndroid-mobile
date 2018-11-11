@@ -8,6 +8,8 @@
         <attr name="primary_text" format="color" />
         <attr name="secondary_text" format="color" />
         <attr name="icons" format="color" />
+        
         <attr name="connect_btn" format="integer" />
+        <attr name="background_image" format="integer" />
     </declare-styleable>
 </resources>

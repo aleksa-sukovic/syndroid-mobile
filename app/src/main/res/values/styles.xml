@@ -20,6 +20,7 @@
         
         <!--Drawables-->
         <item name="connect_btn">@drawable/ic_connect_btn_light</item>
+        <item name="background_image">@drawable/ic_background_light</item>
     </style>
     
     <!-- Dark base application theme. -->
@@ -42,6 +43,7 @@
         
         <!--Drawables-->
         <item name="connect_btn">@drawable/ic_connect_btn_dark</item>
+        <item name="background_image">@drawable/ic_background_dark</item>
     </style>
     
     <!--Connect Activity-->
