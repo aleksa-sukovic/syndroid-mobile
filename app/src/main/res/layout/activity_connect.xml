@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_image"
-    tools:context=".activities.ConnectActivity"
+    tools:context=".activities.connect.ConnectActivity"
     tools:layout_editor_absoluteY="25dp">
     
     <!--App Title-->
@@ -21,9 +21,8 @@
         android:textAllCaps="false"
         android:textColor="?attr/accent"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
     
     <!--App Subtitle-->
     <TextView
@@ -35,9 +34,8 @@
         android:fontFamily="@font/roboto_light"
         android:text="@string/app_claim"
         android:textColor="?attr/secondary_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name" />
+        android:layout_below="@id/app_name"
+        android:layout_centerHorizontal="true"/>
     
     <!--Connect Button-->
     <FrameLayout
@@ -47,10 +45,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:onClick="scanQrCode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_claim"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_marginBottom="16dp"
+        android:layout_centerInParent="true">
         
         <ImageView
             android:layout_width="match_parent"
@@ -71,15 +67,48 @@
 
     </FrameLayout>
     
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/favourites_recycler_view"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/favourites_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:text="Favourites"
+        android:fontFamily="@font/roboto_thin"
+        android:layout_below="@id/btn_connect_container"
+        android:textColor="?attr/icons"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="2dp"
+        />
+    
+    <ImageView
+        android:id="@+id/favourites_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_connect_container" />
+        android:background="?attr/icons"
+        android:layout_below="@id/favourites_text"
+        tools:ignore="ContentDescription" />
+    
+    <!--Favourites-->
+    <FrameLayout
+        android:id="@+id/favourites_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/favourites_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+        
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/favourites_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+             />
+        
+    </FrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
