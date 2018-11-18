@@ -100,13 +100,14 @@
         android:layout_below="@id/favourites_divider"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
-        
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/favourites_recycler_view"
+    
+        <fragment
+            android:id="@+id/fragment_favourites"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-             />
+            android:name="com.aleksa.syndroid.activities.connect.favourites.FavouritesFragment"
+            tools:layout="@layout/fragment_favourites"
+            />
         
     </FrameLayout>
 
