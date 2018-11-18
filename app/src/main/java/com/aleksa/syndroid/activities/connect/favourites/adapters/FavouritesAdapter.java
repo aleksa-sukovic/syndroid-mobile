@@ -104,7 +104,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     public void removeServer(Server server)
     {
         this.serverList.remove(server);
-        this.notifyDataSetChanged();;
+        this.notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements SwipeLayout.SwipeListener{

@@ -1,5 +1,6 @@
 package com.aleksa.syndroid.activities.connect.favourites;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.favourites.adapters.FavouritesAdapter;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.OnFavouritesActionListener;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.FavouritesSwipeTouchCallback;
+import com.aleksa.syndroid.library.dialogs.confirm.ConfirmDialog;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
@@ -106,11 +108,12 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     @Override
     public void onFavouriteDelete(Server server)
     {
-        serverRepository.delete(server).then(data -> new Handler(Looper.getMainLooper()).post(() -> {
+        ConfirmDialog.twoButton(() -> serverRepository.delete(server).then(data -> new Handler(Looper.getMainLooper()).post(() -> {
             favouritesAdapter.removeServer(server);
 
             togglePlaceholderText();
-        }));
+        })), null, getString(R.string.dialog_confirm_title), getString(R.string.dialog_confirm_delete_resource_message) + ": " + server.getName() + " ?")
+            .show(getActivity().getSupportFragmentManager(), "");
     }
 
     @Override

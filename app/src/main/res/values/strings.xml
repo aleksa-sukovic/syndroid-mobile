@@ -5,4 +5,9 @@
     <string name="connect_activity_btn_connect_img">Scan and connect button</string>
     <string name="connect_activity_scan_btn">Scan and connect</string>
     <string name="favourites_fragment_placeholder_text">No servers added</string>
+    <string name="dialog_confirm_ok_button">Ok</string>
+    <string name="dialog_confirm_confirm_button">Confirm</string>
+    <string name="dialog_confirm_dismiss_button">Dismiss</string>
+    <string name="dialog_confirm_title">Are your sure?</string>
+    <string name="dialog_confirm_delete_resource_message">Are you sure you want to delete </string>
 </resources>
