@@ -48,8 +48,17 @@ public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
         }
     }
 
-    public void delete(Entity object) {
-        daoObject.delete(object);
+    public Promise delete(Entity object) {
+        Promise promise = new Promise();
+
+        new Thread(() -> {
+            daoObject.delete(object);
+
+            promise.resolve(object);
+        }).start();
+
+
+        return promise;
     }
 
     public void update(Entity object) {
