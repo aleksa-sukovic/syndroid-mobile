@@ -112,7 +112,7 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
             favouritesAdapter.removeServer(server);
 
             togglePlaceholderText();
-        })), null, getString(R.string.dialog_confirm_title), getString(R.string.dialog_confirm_delete_resource_message) + ": " + server.getName() + " ?")
+        })), null, getString(R.string.dialog_confirm_title), getString(R.string.dialog_confirm_delete_resource_message) + ": \"" + server.getName() + "\" ?")
             .show(getActivity().getSupportFragmentManager(), "");
     }
 
