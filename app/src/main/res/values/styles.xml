@@ -50,4 +50,8 @@
     <style name="ConnectActivityLight" parent="ActivityTheme.Primary.Base.Light" />
     <style name="ConnectActivityDark"  parent="ActivityTheme.Primary.Base.Dark" />
     
+    <!--Scanner Activity-->
+    <style name="ScannerActivityLight" parent="ActivityTheme.Primary.Base.Light" />
+    <style name="ScannerActivityDark"  parent="ActivityTheme.Primary.Base.Dark" />
+    
 </resources>

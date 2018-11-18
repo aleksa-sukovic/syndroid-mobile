@@ -21,6 +21,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
 }
 
 dependencies {
@@ -39,4 +42,7 @@ dependencies {
 
     // Swipe Layout
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    // QrCode Scanner
+    implementation 'com.budiyev.android:code-scanner:2.0.1'
 }

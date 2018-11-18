@@ -16,4 +16,6 @@
     <string name="dialog_edit_server_name_error">Please enter server name!</string>
     <string name="dialog_edit_server_ip_error">Please enter server ip!</string>
     <string name="dialog_edit_server_update_success">Server updated successfully!</string>
+    <string name="scanner_activity_subtitle">Open your desktop client and scan the code you see.\nServer will be automatically added to favourites</string>
+    <string name="scanner_activity_title">Scan to connect</string>
 </resources>

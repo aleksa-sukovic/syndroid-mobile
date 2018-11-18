@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aleksa.syndroid">
     
+    <uses-permission android:name="android.permission.CAMERA" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,17 +15,25 @@
         <activity
             android:name=".activities.connect.ConnectActivity"
             android:label="@string/app_name"
-            android:theme="@style/ConnectActivityLight"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/ConnectActivityLight">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
     
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+    
+        <!--Scanner Activity-->
+        <activity
+            android:name=".activities.scanner.ScannerActivity"
+            android:theme="@style/ScannerActivityLight"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
