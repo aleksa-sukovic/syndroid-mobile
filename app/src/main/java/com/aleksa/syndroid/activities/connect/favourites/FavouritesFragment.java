@@ -2,25 +2,37 @@ package com.aleksa.syndroid.activities.connect.favourites;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.activities.connect.favourites.adapters.FavouritesAdapter;
+import com.aleksa.syndroid.activities.connect.favourites.interfaces.OnFavouritesActionListener;
+import com.aleksa.syndroid.activities.connect.favourites.interfaces.FavouritesSwipeTouchCallback;
 import com.aleksa.syndroid.objects.server.models.Server;
+import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
 import java.util.LinkedList;
+import java.util.List;
 
-public class FavouritesFragment extends Fragment implements OnStartDragListener
+public class FavouritesFragment extends Fragment implements OnFavouritesActionListener
 {
 
-    private FavouritesFragmentListener listener;
-    private ItemTouchHelper            itemTouchHelper;
+    private OnFavouritesSelect listener;
+    private ItemTouchHelper    itemTouchHelper;
+    private ServerRepository   serverRepository;
+    private FavouritesAdapter  favouritesAdapter;
+    private TextView           placeholderText;
 
     public FavouritesFragment()
     {
@@ -37,20 +49,39 @@ public class FavouritesFragment extends Fragment implements OnStartDragListener
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View layout = inflater.inflate(R.layout.fragment_favourites, container, false);
+        View layout               = inflater.inflate(R.layout.fragment_favourites, container, false);
         RecyclerView recyclerView = layout.findViewById(R.id.recycler_view);
+        placeholderText           = layout.findViewById(R.id.placeholder_text);
 
         // Adapter creation
-        FavouritesAdapter favouritesAdapter = new FavouritesAdapter(new LinkedList<>(), this);
+        favouritesAdapter = new FavouritesAdapter(new LinkedList<>(), this);
         recyclerView.setAdapter(favouritesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Setting up touch listener
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(favouritesAdapter);
+        ItemTouchHelper.Callback callback = new FavouritesSwipeTouchCallback(favouritesAdapter);
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
+        // server repository initialization
+        serverRepository = new ServerRepository(getActivity().getApplication());
+        serverRepository.all().then(data -> {
+            favouritesAdapter.setServerList((List<Server>) data);
+            recyclerView.invalidate();
+            togglePlaceholderText();
+        });
+
         return layout;
+    }
+
+    private void togglePlaceholderText()
+    {
+       if (favouritesAdapter.getServerList().size() < 1) {
+           placeholderText.setVisibility(View.VISIBLE);
+           return;
+       }
+
+       placeholderText.setVisibility(View.GONE);
     }
 
     @Override
@@ -58,11 +89,11 @@ public class FavouritesFragment extends Fragment implements OnStartDragListener
     {
         super.onAttach(context);
 
-        if (!(context instanceof FavouritesFragmentListener)) {
-            throw new RuntimeException(context.toString() + " must implement FavouritesFragmentListener");
+        if (!(context instanceof OnFavouritesSelect)) {
+            throw new RuntimeException(context.toString() + " must implement OnFavouritesSelect");
         }
 
-        listener = (FavouritesFragmentListener) context;
+        listener = (OnFavouritesSelect) context;
     }
 
     @Override
@@ -73,12 +104,34 @@ public class FavouritesFragment extends Fragment implements OnStartDragListener
     }
 
     @Override
+    public void onFavouriteDelete(Server server)
+    {
+        serverRepository.delete(server).then(data -> new Handler(Looper.getMainLooper()).post(() -> {
+            favouritesAdapter.removeServer(server);
+
+            togglePlaceholderText();
+        }));
+    }
+
+    @Override
+    public void onFavouriteEdit(Server server)
+    {
+        Log.d("FavouritesFragment", "Edit " + server.getName());
+    }
+
+    @Override
+    public void onFavouriteSelect(Server server)
+    {
+        listener.onFavouritesSelect(server);
+    }
+
+    @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder)
     {
         itemTouchHelper.startDrag(viewHolder);
     }
 
-    public interface FavouritesFragmentListener
+    public interface OnFavouritesSelect
     {
         void onFavouritesSelect(Server server);
     }

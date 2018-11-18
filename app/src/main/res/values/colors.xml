@@ -21,4 +21,9 @@
     <color name="tdark_icons">#FFFFFF</color>
     <color name="tdark_divider">#CDCDCD</color>
     <color name="tdark_background">#8E989D</color>
+    
+    <!--Common colors-->
+    <color name="success">#24BB21</color>
+    <color name="warning">#FFD912</color>
+    <color name="danger">#D91010</color>
 </resources>

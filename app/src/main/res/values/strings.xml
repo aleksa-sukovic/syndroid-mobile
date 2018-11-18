@@ -4,7 +4,5 @@
     <string name="app_claim">synchronize everything</string>
     <string name="connect_activity_btn_connect_img">Scan and connect button</string>
     <string name="connect_activity_scan_btn">Scan and connect</string>
-    
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favourites_fragment_placeholder_text">No servers added</string>
 </resources>

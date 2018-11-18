@@ -1,4 +1,4 @@
-package com.aleksa.syndroid.activities.connect.favourites;
+package com.aleksa.syndroid.activities.connect.favourites.adapters;
 
 public interface ItemTouchHelperAdapter
 {

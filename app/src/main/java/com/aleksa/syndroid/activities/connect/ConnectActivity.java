@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 
@@ -12,7 +13,7 @@ import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 
 
-public class ConnectActivity extends AppCompatActivity implements FavouritesFragment.FavouritesFragmentListener
+public class ConnectActivity extends AppCompatActivity implements FavouritesFragment.OnFavouritesSelect
 {
 
     @Override
@@ -34,6 +35,6 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     @Override
     public void onFavouritesSelect(Server server)
     {
-        Log.d("ConnectActivity", server.toString());
+        ConnectActivity.this.runOnUiThread(() -> Toast.makeText(this, server.getName(), Toast.LENGTH_SHORT).show());
     }
 }
