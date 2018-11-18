@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.favourites.adapters.FavouritesAdapter;
+import com.aleksa.syndroid.activities.connect.favourites.dialogs.EditServerDialog;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.OnFavouritesActionListener;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.FavouritesSwipeTouchCallback;
 import com.aleksa.syndroid.library.dialogs.confirm.ConfirmDialog;
@@ -119,7 +120,11 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     @Override
     public void onFavouriteEdit(Server server)
     {
-        Log.d("FavouritesFragment", "Edit " + server.getName());
+        EditServerDialog dialog = EditServerDialog.getInstance(server, serverRepository, saved -> {
+            favouritesAdapter.notifyDataSetChanged();
+        });
+
+        dialog.show(getActivity().getSupportFragmentManager(), "");
     }
 
     @Override

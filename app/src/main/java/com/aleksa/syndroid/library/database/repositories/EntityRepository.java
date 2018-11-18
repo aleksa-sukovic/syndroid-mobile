@@ -61,8 +61,16 @@ public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
         return promise;
     }
 
-    public void update(Entity object) {
-        daoObject.update(object);
+    public Promise update(Entity object) {
+        Promise promise = new Promise();
+
+        new Thread(() -> {
+            daoObject.update(object);
+
+            promise.resolve(object);
+        }).start();
+
+        return promise;
     }
 
     protected void setDaoObject(DaoObject daoObject) {
