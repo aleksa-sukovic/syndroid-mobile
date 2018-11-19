@@ -10,4 +10,5 @@ public interface OnFavouritesActionListener
     void onFavouriteEdit(Server server);
     void onFavouriteSelect(Server server);
     void onStartDrag(RecyclerView.ViewHolder viewHolder);
+    void onOrderChange(Server one, Server two);
 }

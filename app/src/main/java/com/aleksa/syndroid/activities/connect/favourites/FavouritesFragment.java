@@ -1,6 +1,5 @@
 package com.aleksa.syndroid.activities.connect.favourites;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,6 +135,13 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     public void onStartDrag(RecyclerView.ViewHolder viewHolder)
     {
         itemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void onOrderChange(Server one, Server two)
+    {
+        serverRepository.update(one);
+        serverRepository.update(two);
     }
 
     public interface OnFavouritesSelect

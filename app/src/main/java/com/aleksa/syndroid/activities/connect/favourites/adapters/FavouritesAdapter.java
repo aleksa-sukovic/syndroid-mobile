@@ -76,6 +76,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
         first.setPosition(toPosition);
         second.setPosition(fromPosition);
+        actionListener.onOrderChange(first, second);
 
         Collections.swap(serverList, fromPosition, toPosition);
 
