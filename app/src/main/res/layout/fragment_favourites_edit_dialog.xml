@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textSize="18sp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/roboto_medium"
         android:textColor="?attr/primary_text"
         />
@@ -32,9 +32,9 @@
             android:id="@+id/server_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/roboto_light"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:inputType="text"
             android:autofillHints="@string/dialog_edit_server_name_field"
             android:hint="@string/dialog_edit_server_name_field"
@@ -49,7 +49,7 @@
             android:id="@+id/server_ip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/roboto_light"
             android:textSize="16sp"
             android:inputType="text"
             android:autofillHints="@string/dialog_edit_server_ip_field"
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:gravity="end"
         >
         

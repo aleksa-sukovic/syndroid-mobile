@@ -11,5 +11,6 @@
         
         <attr name="connect_btn" format="integer" />
         <attr name="background_image" format="integer" />
+        <attr name="favourites_item_bg" format="integer" />
     </declare-styleable>
 </resources>
