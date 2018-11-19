@@ -27,12 +27,18 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-    
-        <!--Scanner Activity-->
+        
+        <!-- Scanner Activity -->
         <activity
             android:name=".activities.scanner.ScannerActivity"
-            android:theme="@style/ScannerActivityLight"
             android:screenOrientation="portrait"
+            android:theme="@style/ScannerActivityLight" />
+        
+        <!--Dashboard Activity-->
+        <activity
+            android:name=".activities.dashboard.DashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DashboardActivityLight"
             />
     </application>
 

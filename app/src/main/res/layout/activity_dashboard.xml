@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background"
+    tools:context=".activities.dashboard.DashboardActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"
+        android:fontFamily="@font/roboto_light"
+        android:textSize="34sp"
+        android:textColor="?attr/primary_text"
+        android:layout_gravity="center"/>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Switch Theme"
+        android:onClick="switchTheme"
+        android:background="?attr/primary"
+        android:padding="16dp"
+        />
+    
+</FrameLayout>

@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 
 import com.aleksa.syndroid.activities.connect.favourites.FavouritesFragment;
+import com.aleksa.syndroid.activities.dashboard.DashboardActivity;
 import com.aleksa.syndroid.activities.scanner.ScannerActivity;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
@@ -29,6 +31,13 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
+
+        // Only for testing purposes, allows direct access to dashboard
+        findViewById(R.id.btn_connect_container).setOnLongClickListener(v -> {
+            startActivity(new Intent(this, DashboardActivity.class));
+
+            return true;
+        });
     }
 
     public void scanQrCode(View view)
@@ -56,5 +65,7 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
 
         String scanned = data.getData().toString();
         Toast.makeText(this, scanned, Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 }

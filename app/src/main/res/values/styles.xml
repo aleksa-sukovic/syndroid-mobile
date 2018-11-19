@@ -56,4 +56,8 @@
     <style name="ScannerActivityLight" parent="ActivityTheme.Primary.Base.Light" />
     <style name="ScannerActivityDark"  parent="ActivityTheme.Primary.Base.Dark" />
     
+    <!--Dashboard Activity-->
+    <style name="DashboardActivityLight" parent="ActivityTheme.Primary.Base.Light" />
+    <style name="DashboardActivityDark"  parent="ActivityTheme.Primary.Base.Dark" />
+
 </resources>
