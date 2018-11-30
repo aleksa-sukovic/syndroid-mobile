@@ -48,4 +48,10 @@ dependencies {
 
     // Round ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // WebSocket
+    implementation 'com.neovisionaries:nv-websocket-client:2.6'
+
+    // EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }
