@@ -5,7 +5,8 @@ public class Event<EventType>
     private EventType eventType;
     private String message;
 
-    public Event(EventType eventType, String message) {
+    public Event(EventType eventType, String message)
+    {
         this.eventType = eventType;
         this.message   = message;
     }

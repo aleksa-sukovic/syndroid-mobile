@@ -18,13 +18,12 @@ public abstract class SynDroidDatabase extends RoomDatabase
     // Singleton implementation of SynDroid database
     private static volatile SynDroidDatabase INSTANCE;
 
-    public static SynDroidDatabase getDatabase(final Context context) {
+    public static SynDroidDatabase getDatabase(final Context context)
+    {
         if (INSTANCE == null) {
             synchronized (SynDroidDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                        SynDroidDatabase.class, "syndroid")
-                        .build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), SynDroidDatabase.class, "syndroid").build();
                 }
             }
         }

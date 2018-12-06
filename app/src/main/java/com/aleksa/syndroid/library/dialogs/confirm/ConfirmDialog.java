@@ -75,20 +75,21 @@ public class ConfirmDialog extends DialogFragment
             return;
         }
 
-        // title
         TextView title = view.findViewById(R.id.title);
         title.setText(getArguments().getString("title", "Default Title"));
 
-        // message
         TextView message = view.findViewById(R.id.content);
         message.setText(getArguments().getString("message", "Default Message"));
 
-        // confirm btn
-        if (onConfirm != null) {
-            TextView confirmBtn = view.findViewById(R.id.confirm_btn);
-            confirmBtn.setText(getString(R.string.dialog_confirm_ok_button));
-            confirmBtn.setOnClickListener((e) -> onConfirm.fire());
-        }
+        TextView confirmBtn = view.findViewById(R.id.confirm_btn);
+        confirmBtn.setText(getString(R.string.dialog_confirm_ok_button));
+        confirmBtn.setOnClickListener(e -> {
+            if (onConfirm != null) {
+                onConfirm.fire();
+            }
+
+            dismiss();
+        });
     }
 
     private void setupTwoButtonDialog(View view)
@@ -97,15 +98,12 @@ public class ConfirmDialog extends DialogFragment
             return;
         }
 
-        // title
         TextView title = view.findViewById(R.id.title);
         title.setText(getArguments().getString("title", "Default Title"));
 
-        // message
         TextView message = view.findViewById(R.id.content);
         message.setText(getArguments().getString("message", "Default Message"));
 
-        // confirm btn
         TextView confirmBtn = view.findViewById(R.id.confirm_btn);
         confirmBtn.setText(getString(R.string.dialog_confirm_confirm_button));
         confirmBtn.setOnClickListener(e -> {

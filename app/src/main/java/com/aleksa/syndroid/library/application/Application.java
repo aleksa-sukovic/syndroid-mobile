@@ -1,61 +1,29 @@
 package com.aleksa.syndroid.library.application;
 
-import com.aleksa.syndroid.library.events.ApplicationEvent;
-import com.aleksa.syndroid.library.server.WebSocketServer;
-import com.aleksa.syndroid.library.server.WebSocketServerListener;
+import com.aleksa.syndroid.library.sockets.WebSocket;
+import com.aleksa.syndroid.library.sockets.WebSocketListener;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.IOException;
-
-public class Application implements WebSocketServerListener
+public class Application implements WebSocketListener
 {
-    private String ip;
-    private WebSocketServer webSocketServer;
+    private String    ip;
+    private int       port;
+    private WebSocket webSocket;
 
-    public Application(String ip) {
+    public Application(String ip, int port)
+    {
         this.ip = ip;
+        this.port = port;
 
-        initializeServer();
+        this.webSocket = new WebSocket(this);
     }
 
-    private void initializeServer() {
-        this.webSocketServer = new WebSocketServer(this);
-
-        try {
-            this.webSocketServer.createServer(ip);
-        } catch(IOException e) {
-            EventBus.getDefault()
-                .post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_CREATION_ERROR, "Unable to create server!"));
-        }
-    }
-
-    public void start() {
-        try {
-            this.webSocketServer.connect();
-        } catch(Exception e) {
-            EventBus.getDefault()
-                    .post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_CONNECTION_ERROR, "Unable to connect to server!"));
-        }
+    public void start()
+    {
+        this.webSocket.connect();
     }
 
     public String getIp()
     {
         return ip;
-    }
-
-    public void setIp(String ip)
-    {
-        this.ip = ip;
-    }
-
-    public WebSocketServer getWebSocketServer()
-    {
-        return webSocketServer;
-    }
-
-    public void setWebSocketServer(WebSocketServer webSocketServer)
-    {
-        this.webSocketServer = webSocketServer;
     }
 }
