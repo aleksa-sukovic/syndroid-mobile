@@ -32,6 +32,8 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
+        startActivity(new Intent(this, DashboardActivity.class));
+
         // Only for testing purposes, allows direct access to dashboard
         findViewById(R.id.btn_connect_container).setOnLongClickListener(v -> {
             startActivity(new Intent(this, DashboardActivity.class));

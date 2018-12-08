@@ -8,14 +8,11 @@
     android:background="?attr/background"
     tools:context=".activities.dashboard.DashboardActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dashboard"
-        android:fontFamily="@font/roboto_light"
-        android:textSize="34sp"
-        android:textColor="?attr/primary_text"
-        android:layout_gravity="center"/>
+        android:layout_height="wrap_content" />
     
     <Button
         android:layout_width="wrap_content"
@@ -25,7 +22,7 @@
         android:textSize="18sp"
         android:fontFamily="@font/roboto_light"
         android:text="Switch Theme"
-        android:onClick="switchTheme"
+        android:onClick="sendMessage"
         android:background="?attr/primary"
         android:padding="16dp"
         />
