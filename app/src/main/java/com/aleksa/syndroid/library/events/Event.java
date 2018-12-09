@@ -1,14 +1,14 @@
 package com.aleksa.syndroid.library.events;
 
-public class Event<EventType>
+public class Event<EventType, EventData>
 {
     private EventType eventType;
-    private String message;
+    private EventData data;
 
-    public Event(EventType eventType, String message)
+    public Event(EventType eventType, EventData data)
     {
         this.eventType = eventType;
-        this.message   = message;
+        this.data   = data;
     }
 
     public EventType getEventType()
@@ -21,13 +21,13 @@ public class Event<EventType>
         this.eventType = eventType;
     }
 
-    public String getMessage()
+    public EventData getData()
     {
-        return message;
+        return data;
     }
 
-    public void setMessage(String message)
+    public void setData(EventData data)
     {
-        this.message = message;
+        this.data = data;
     }
 }
