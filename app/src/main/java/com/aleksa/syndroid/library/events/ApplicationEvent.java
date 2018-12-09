@@ -1,6 +1,6 @@
 package com.aleksa.syndroid.library.events;
 
-public class ApplicationEvent extends Event<ApplicationEvent.EventCode>
+public class ApplicationEvent extends Event<ApplicationEvent.EventCode, String>
 {
     public ApplicationEvent(EventCode eventCode, String message)
     {
@@ -9,6 +9,8 @@ public class ApplicationEvent extends Event<ApplicationEvent.EventCode>
 
     public enum EventCode
     {
-        SERVER_CREATION_ERROR, SERVER_CONNECTION_ERROR
+        SERVER_CREATION_ERROR, SERVER_CONNECTION_ERROR,
+        SERVER_DISCONNECT,
+        INCOMING_RESPONSE
     }
 }
