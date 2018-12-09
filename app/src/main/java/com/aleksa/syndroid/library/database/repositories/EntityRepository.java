@@ -43,11 +43,16 @@ public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
         return promise;
     }
 
-    public void insert(Entity... objects)
+    public Promise insert(Entity object)
     {
-        for(Entity object : objects) {
+        Promise promise = new Promise();
+
+        new Thread(() -> {
             daoObject.insert(object);
-        }
+            promise.resolve(object);
+        }).start();
+
+        return promise;
     }
 
     public Promise delete(Entity object)

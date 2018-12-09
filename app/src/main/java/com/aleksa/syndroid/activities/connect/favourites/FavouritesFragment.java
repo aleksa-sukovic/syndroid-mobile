@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     private ServerRepository   serverRepository;
     private FavouritesAdapter  favouritesAdapter;
     private TextView           placeholderText;
+    private RecyclerView       recyclerView;
+
 
     public FavouritesFragment()
     {
@@ -51,7 +54,7 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
                              Bundle savedInstanceState)
     {
         View layout               = inflater.inflate(R.layout.fragment_favourites, container, false);
-        RecyclerView recyclerView = layout.findViewById(R.id.recycler_view);
+        recyclerView = layout.findViewById(R.id.recycler_view);
         placeholderText           = layout.findViewById(R.id.placeholder_text);
 
         // Adapter creation
@@ -66,13 +69,17 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
 
         // server repository initialization
         serverRepository = new ServerRepository(getActivity().getApplication());
+
+        return layout;
+    }
+
+    private void refreshData()
+    {
         serverRepository.all().then(data -> {
             favouritesAdapter.setServerList((List<Server>) data);
             recyclerView.invalidate();
             togglePlaceholderText();
         });
-
-        return layout;
     }
 
     private void togglePlaceholderText()
@@ -83,6 +90,13 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
        }
 
        placeholderText.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onStart()
+    {
+        refreshData();
+        super.onStart();
     }
 
     @Override

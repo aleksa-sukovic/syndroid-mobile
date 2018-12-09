@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,6 +14,7 @@ import com.aleksa.syndroid.activities.dashboard.DashboardActivity;
 import com.aleksa.syndroid.activities.scanner.ScannerActivity;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
+import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
 
 public class ConnectActivity extends AppCompatActivity implements FavouritesFragment.OnFavouritesSelect
@@ -31,15 +31,6 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
-
-        startActivity(new Intent(this, DashboardActivity.class));
-
-        // Only for testing purposes, allows direct access to dashboard
-        findViewById(R.id.btn_connect_container).setOnLongClickListener(v -> {
-            startActivity(new Intent(this, DashboardActivity.class));
-
-            return true;
-        });
     }
 
     public void scanQrCode(View view)
@@ -51,7 +42,10 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     @Override
     public void onFavouritesSelect(Server server)
     {
-        ConnectActivity.this.runOnUiThread(() -> Toast.makeText(this, server.getName(), Toast.LENGTH_SHORT).show());
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.putExtra("ip", server.getIp());
+
+        startActivity(intent);
     }
 
     @Override
@@ -65,9 +59,11 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
             return;
         }
 
-        String scanned = data.getData().toString();
-        Toast.makeText(this, scanned, Toast.LENGTH_SHORT).show();
+        String ip = data.getData().toString();
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.putExtra("ip", ip);
 
-        startActivity(new Intent(this, DashboardActivity.class));
+        ServerRepository repository = new ServerRepository(getApplication());
+        repository.insert(new Server(ip, "New Server")).then(result -> startActivity(intent));
     }
 }

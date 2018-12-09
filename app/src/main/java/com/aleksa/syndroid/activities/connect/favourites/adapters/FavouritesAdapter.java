@@ -2,6 +2,8 @@ package com.aleksa.syndroid.activities.connect.favourites.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -94,7 +96,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     {
         this.serverList.clear();
         this.serverList.addAll(list);
-        this.notifyDataSetChanged();
+        new Handler(Looper.getMainLooper()).post(this::notifyDataSetChanged);
     }
 
     public List<Server> getServerList()
