@@ -75,6 +75,11 @@ public class Route
         return null;
     }
 
+    public boolean isExceptionRoute()
+    {
+        return getBasePath().matches("^/exception");
+    }
+
     public String getRegExPath()
     {
         return regExPath;
