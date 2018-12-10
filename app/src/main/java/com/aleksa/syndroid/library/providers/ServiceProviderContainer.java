@@ -1,17 +1,23 @@
 package com.aleksa.syndroid.library.providers;
 
-import java.util.ArrayList;
+import com.aleksa.syndroid.objects.file.FileServiceProvider;
+import com.aleksa.syndroid.objects.file.SoundServiceProvider;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class ServiceProviderContainer
 {
-    private static List<ServiceProvider> serviceProviders;
+    private List<Class<?>> serviceProviders;
 
-    static {
-        serviceProviders = new ArrayList<>();
+    {
+        serviceProviders = Arrays.asList(
+            FileServiceProvider.class,
+            SoundServiceProvider.class
+        );
     }
 
-    public static List<ServiceProvider> getProvider()
+    public List<Class<?>> getProviders()
     {
         return serviceProviders;
     }
