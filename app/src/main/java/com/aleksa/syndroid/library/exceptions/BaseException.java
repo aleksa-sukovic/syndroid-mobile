@@ -30,7 +30,7 @@ public class BaseException extends Exception
             return output;
         }
 
-        output += "type=" + request.getType() + "&request_id=" + request.getId();
+        output += "type=response&request_id=" + request.getId();
 
         return output;
     }
