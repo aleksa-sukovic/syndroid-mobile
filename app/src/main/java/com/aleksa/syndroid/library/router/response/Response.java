@@ -4,6 +4,8 @@ import com.aleksa.syndroid.library.router.Route;
 
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 public class Response
 {
     private Route route;
@@ -44,5 +46,12 @@ public class Response
     public int getResponseCode()
     {
         return this.responseCode;
+    }
+
+    @NonNull
+    @Override
+    public String toString()
+    {
+        return "Route: " + route.getPath() + " Data: " + data.toString();
     }
 }
