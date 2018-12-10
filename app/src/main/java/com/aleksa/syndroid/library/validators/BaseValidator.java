@@ -1,7 +1,5 @@
 package com.aleksa.syndroid.library.validators;
 
-import android.util.Log;
-
 import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.library.validators.exceptions.ValidationException;
 
@@ -26,8 +24,6 @@ public class BaseValidator
         Map<String, Map<String, String>> errors = new HashMap<>();
 
         beforeValidation(rules);
-        Log.d("Application", "validate: beforeValidation " + rules.toString());
-        Log.d("Application", "validate: params -> " + request.getParams().toString());
 
         validateRequired(params, rules, errors);
         validatePattern(params, rules, errors);
@@ -44,7 +40,7 @@ public class BaseValidator
         }
     }
 
-    private void afterValidation(Map<String,Map<String,String>> errors, Request request) throws ValidationException
+    private void afterValidation(Map<String, Map<String,String>> errors, Request request) throws ValidationException
     {
         if (errors.keySet().size() > 0) {
             throw new ValidationException(errors, request);
@@ -55,7 +51,7 @@ public class BaseValidator
     {
         for (Rule rule : rules) {
             if (rule.isRequired() && !(params.containsKey(rule.getName()))) {
-                addValidationError(errors, rule.getName(), "required", "Param is required");
+                addValidationError(errors, rule.getName(), "required", "Param '" + rule.getName() + "' is required");
             }
         }
     }
@@ -107,10 +103,5 @@ public class BaseValidator
         }
 
         return filtered;
-    }
-
-    public List<Rule> getRules()
-    {
-        return this.rules;
     }
 }
