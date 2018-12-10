@@ -30,7 +30,7 @@ public class ResponseManager implements Manager<String, String>
         Map<String, String> params = routeParser.parseParams(new Route(), message);
         OutgoingRequest request = findQueuedRequest(params.get("request_id"));
 
-        if (request == null || !isValidResponse(request, message)) {
+        if (request == null) {
             return null;
         }
 
@@ -44,11 +44,6 @@ public class ResponseManager implements Manager<String, String>
     void expectResponseFor(OutgoingRequest request)
     {
         queue.add(request);
-    }
-
-    private boolean isValidResponse(OutgoingRequest request, String message)
-    {
-        return request.getRoute().isExceptionRoute() || routeMatcher.matchWith(message, request.getRoute());
     }
 
     private void removeFromQueue(Request request)
