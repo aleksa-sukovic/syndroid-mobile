@@ -18,4 +18,7 @@
     <string name="dialog_edit_server_update_success">Server updated successfully!</string>
     <string name="scanner_activity_subtitle">Open your desktop client and scan the code you see.\nServer will be automatically added to favourites</string>
     <string name="scanner_activity_title">Scan to connect</string>
+    <string name="dashboard_toolbar_menu_keyboard_item">Keyboard</string>
+    <string name="dashboard_toolbar_menu_left_click_item">Left Click</string>
+    <string name="dashboard_toolbar_menu_right_click_item">Right Click</string>
 </resources>
