@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_keyboard"
+        android:title="@string/dashboard_toolbar_menu_keyboard_item"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_keyboard"/>
+    <item
+        android:id="@+id/menu_left_click"
+        android:title="@string/dashboard_toolbar_menu_left_click_item"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_right_click"
+        android:title="@string/dashboard_toolbar_menu_right_click_item"
+        app:showAsAction="never"/>
+</menu>
