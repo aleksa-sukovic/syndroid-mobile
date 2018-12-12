@@ -1,21 +1,23 @@
 package com.aleksa.syndroid.activities.dashboard;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.activities.connect.ConnectActivity;
 import com.aleksa.syndroid.library.application.Application;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
 import com.aleksa.syndroid.managers.ThemeManager;
 
 public class DashboardActivity extends AppCompatActivity
 {
 
     private Application application;
-    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,13 +26,30 @@ public class DashboardActivity extends AppCompatActivity
             setTheme(R.style.ConnectActivityDark);
         }
 
-        String ip = getIntent().getStringExtra("ip");
-        application = Application.getInstance(ip, Application.getDefaultPort());
+        application = Application.getInstance(getIntent().getStringExtra("ip"), Application.getDefaultPort());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        editText = findViewById(R.id.edit_text);
+        initialize();
+    }
+
+    private void initialize()
+    {
+        initializeToolbar();
+    }
+
+    private void initializeToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
     }
 
     @Override
@@ -47,18 +66,44 @@ public class DashboardActivity extends AppCompatActivity
         super.onStop();
     }
 
-    public void sendMessage(View view)
+    @Override
+    public void onBackPressed()
     {
-        OutgoingRequest request = new OutgoingRequest.Builder()
-            .setExpectsResponse(true)
-            .setRoutePath("/sound/volume/set")
-            .addParam("amount", Integer.toString(58))
-            .setOnResponseCallback(response -> Log.d("Dashboard", "sendMessage: response -> " + response.getData()))
-            .build();
+        application.stop();
 
-        Log.d("Dashboard", "sendMessage: request -> " + request.toString());
+        Intent intent = new Intent(this, ConnectActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        application.send(request);
-        application.sendMessage(editText.getText().toString());
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.dashboard_toolbar_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId()) {
+            case android.R.id.home : {
+                Toast.makeText(this, "App Drawer", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            case R.id.menu_left_click : {
+                Toast.makeText(this, "Left Click", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            case R.id.menu_right_click : {
+                Toast.makeText(this, "Right Click", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        }
+
+        return false;
     }
 }
