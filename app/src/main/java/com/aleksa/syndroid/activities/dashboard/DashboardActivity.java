@@ -94,6 +94,10 @@ public class DashboardActivity extends AppCompatActivity
                 Toast.makeText(this, "App Drawer", Toast.LENGTH_SHORT).show();
                 return true;
             }
+            case R.id.menu_keyboard : {
+                Toast.makeText(this, "Keyboard", Toast.LENGTH_SHORT).show();
+                return true;
+            }
             case R.id.menu_left_click : {
                 Toast.makeText(this, "Left Click", Toast.LENGTH_SHORT).show();
                 return true;
