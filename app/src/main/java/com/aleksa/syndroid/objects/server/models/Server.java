@@ -3,11 +3,15 @@ package com.aleksa.syndroid.objects.server.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.Objects;
+
 @Entity(tableName = "servers")
-public class Server
+public class Server implements Parcelable
 {
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -30,6 +34,14 @@ public class Server
         this.ip = ip;
         this.name = name;
         this.position = position;
+    }
+
+    public Server(Parcel in)
+    {
+        this.id = in.readLong();
+        this.position = in.readInt();
+        this.name = Objects.requireNonNull(in.readString(), "Name must not be null");
+        this.ip = Objects.requireNonNull(in.readString(), "IP must not be null");
     }
 
     @NonNull
@@ -79,4 +91,29 @@ public class Server
 
         return ((Server) obj).id == this.id;
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeLong(this.id);
+        dest.writeInt(this.position);
+        dest.writeString(this.name);
+        dest.writeString(this.ip);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<Server>() {
+        public Server createFromParcel(Parcel in) {
+            return new Server(in);
+        }
+
+        public Server[] newArray(int size) {
+            return new Server[size];
+        }
+    };
 }
