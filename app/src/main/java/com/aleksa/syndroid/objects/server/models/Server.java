@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 public class Server
 {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @NonNull
     private String name;
@@ -32,10 +32,12 @@ public class Server
         this.position = position;
     }
 
+    @NonNull
     public String getIp() {
         return this.ip;
     }
 
+    @NonNull
     public String getName() {
         return this.name;
     }
@@ -44,11 +46,11 @@ public class Server
         return this.position;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }

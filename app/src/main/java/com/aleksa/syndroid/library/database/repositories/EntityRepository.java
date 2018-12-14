@@ -31,7 +31,7 @@ public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
         return promise;
     }
 
-    public Promise one(int id)
+    public Promise one(long id)
     {
         Promise promise = new Promise();
 
@@ -48,8 +48,9 @@ public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
         Promise promise = new Promise();
 
         new Thread(() -> {
-            daoObject.insert(object);
-            promise.resolve(object);
+            long id = daoObject.insert(object);
+
+            one(id).then(promise::resolve);
         }).start();
 
         return promise;

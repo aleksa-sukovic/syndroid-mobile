@@ -15,7 +15,7 @@ import java.util.List;
 public interface ServerDao extends BaseDao<Server>
 {
     @Insert
-    void insert(Server server);
+    long insert(Server server);
 
     @Query("DELETE FROM servers")
     void deleteAll();
@@ -24,7 +24,7 @@ public interface ServerDao extends BaseDao<Server>
     List<Server> all();
 
     @Query("SELECT * FROM servers WHERE id = :id")
-    Server one(int id);
+    Server one(long id);
 
     @Update
     void update(Server server);

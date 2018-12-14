@@ -5,9 +5,9 @@ import java.util.List;
 public interface BaseDao<T>
 {
     List<T> all();
-    T one(int id);
+    T one(long id);
     void update(T object);
     void delete(T object);
-    void insert(T object);
+    long insert(T object);
     void deleteAll();
 }
