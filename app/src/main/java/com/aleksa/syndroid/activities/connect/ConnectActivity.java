@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 
@@ -36,6 +35,7 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     public void scanQrCode(View view)
     {
         Intent intent = new Intent(this, ScannerActivity.class);
+
         startActivityForResult(intent, SCAN_QR_REQUEST_CODE);
     }
 
@@ -43,7 +43,8 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     public void onFavouritesSelect(Server server)
     {
         Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putExtra("ip", server.getIp());
+
+        intent.putExtra("id", server.getId());
 
         startActivity(intent);
     }
@@ -59,11 +60,9 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
             return;
         }
 
-        String ip = data.getData().toString();
-        Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putExtra("ip", ip);
-
         ServerRepository repository = new ServerRepository(getApplication());
-        repository.insert(new Server(ip, "New Server")).then(result -> startActivity(intent));
+
+        repository.insert(new Server(data.getData().toString(), "New Server"))
+            .then(result -> onFavouritesSelect((Server) result));
     }
 }
