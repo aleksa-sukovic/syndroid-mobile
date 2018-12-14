@@ -28,6 +28,7 @@ public class Application implements WebSocketListener, Bootstrappable
 
     private String                                  ip;
     private int                                     port;
+    private boolean                                 activeConnection;
     private Map<Bootstrapper.Data, Object>          serviceProviderData;
     private WebSocket                               webSocket;
     private SocketManager                           manager;
@@ -70,15 +71,22 @@ public class Application implements WebSocketListener, Bootstrappable
 
     public void start()
     {
+        if (activeConnection) {
+            return;
+        }
+
         this.webSocket = new WebSocket(ip, port, this);
         this.manager = new SocketManager((List<Route>) serviceProviderData.get(Bootstrapper.Data.ROUTES));
 
         this.webSocket.connect();
+
+        this.activeConnection = true;
     }
 
     public void stop()
     {
         this.webSocket.disconnect();
+        this.activeConnection = true;
     }
 
     public void sendMessage(String message)
@@ -96,6 +104,7 @@ public class Application implements WebSocketListener, Bootstrappable
     @Override
     public void onOpen()
     {
+        activeConnection = true;
         Log.d(TAG, "onOpen: ");
     }
 
@@ -121,6 +130,7 @@ public class Application implements WebSocketListener, Bootstrappable
     @Override
     public void onClosed()
     {
+        activeConnection = false;
         Log.d(TAG, "onClosed: ");
         EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Connection with server closed successfully"));
     }
@@ -128,6 +138,7 @@ public class Application implements WebSocketListener, Bootstrappable
     @Override
     public void onFailure()
     {
+        activeConnection = false;
         Log.d(TAG, "onFailure: application");
         EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Connection with server closed violently"));
     }
