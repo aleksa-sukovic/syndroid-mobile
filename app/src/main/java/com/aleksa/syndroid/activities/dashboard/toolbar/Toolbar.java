@@ -1,4 +1,4 @@
-package com.aleksa.syndroid.activities.dashboard;
+package com.aleksa.syndroid.activities.dashboard.toolbar;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;

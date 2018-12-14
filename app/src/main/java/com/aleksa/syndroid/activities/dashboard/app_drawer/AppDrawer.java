@@ -1,4 +1,4 @@
-package com.aleksa.syndroid.activities.dashboard;
+package com.aleksa.syndroid.activities.dashboard.app_drawer;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
