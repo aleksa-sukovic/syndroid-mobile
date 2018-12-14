@@ -44,7 +44,7 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     {
         Intent intent = new Intent(this, DashboardActivity.class);
 
-        intent.putExtra("id", server.getId());
+        intent.putExtra("server", server);
 
         startActivity(intent);
     }

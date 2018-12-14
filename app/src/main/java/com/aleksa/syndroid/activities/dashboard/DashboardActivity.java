@@ -1,23 +1,34 @@
 package com.aleksa.syndroid.activities.dashboard;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.ConnectActivity;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.managers.ThemeManager;
+import com.aleksa.syndroid.objects.server.models.Server;
+import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
 public class DashboardActivity extends AppCompatActivity
 {
 
     private Application application;
+    private ServerRepository serverRepository;
+    private AppDrawer appDrawer;
+    private Server server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,10 +37,12 @@ public class DashboardActivity extends AppCompatActivity
             setTheme(R.style.ConnectActivityDark);
         }
 
-        application = Application.getInstance(getIntent().getStringExtra("ip"), Application.getDefaultPort());
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        server = getIntent().getParcelableExtra("server");
+        serverRepository = new ServerRepository(getApplication());
+        appDrawer = new AppDrawer(this, server, R.id.drawer_layout, R.id.navigation_view);
 
         initialize();
     }
@@ -37,6 +50,9 @@ public class DashboardActivity extends AppCompatActivity
     private void initialize()
     {
         initializeToolbar();
+
+        application = Application.getInstance(server.getIp(), Application.getDefaultPort());
+        application.start();
     }
 
     private void initializeToolbar()
@@ -55,14 +71,20 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onStart()
     {
-        application.start();
+        if (application != null) {
+            application.start();
+        }
+
         super.onStart();
     }
 
     @Override
     protected void onStop()
     {
-        application.stop();
+        if (application != null) {
+            application.stop();
+        }
+
         super.onStop();
     }
 
@@ -91,7 +113,7 @@ public class DashboardActivity extends AppCompatActivity
     {
         switch(item.getItemId()) {
             case android.R.id.home : {
-                Toast.makeText(this, "App Drawer", Toast.LENGTH_SHORT).show();
+                appDrawer.openDrawer();
                 return true;
             }
             case R.id.menu_keyboard : {
