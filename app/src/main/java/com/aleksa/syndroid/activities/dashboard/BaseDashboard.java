@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.ConnectActivity;
 import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.AppDrawer;
+import com.aleksa.syndroid.activities.dashboard.navigation.menu.ToolbarMenu;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
@@ -18,8 +18,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import androidx.annotation.Nullable;
 
-public abstract class BaseDashboard extends AppCompatActivity
+public abstract class BaseDashboard extends AppCompatActivity implements ToolbarMenu.ToolbarMenuListener
 {
+    private ToolbarMenu toolbarMenu;
     private AppDrawer appDrawer;
     private BottomNavigation bottomNavigation;
 
@@ -34,21 +35,18 @@ public abstract class BaseDashboard extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        appDrawer = new AppDrawer(this, getServer());
-        bottomNavigation = new BottomNavigation(this);
 
         initialize();
-        afterInitialization();
     }
 
     protected void beforeInitialization() {
         //
     }
 
-    protected abstract void initialize();
-
-    protected void afterInitialization() {
-        appDrawer.setServer(getServer());
+    protected void initialize() {
+        toolbarMenu = new ToolbarMenu(this, R.menu.dashboard_toolbar_menu);
+        appDrawer = new AppDrawer(this, getServer());
+        bottomNavigation = new BottomNavigation(this);
     }
 
     protected abstract Application getSynDroidApplication();
@@ -58,7 +56,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.dashboard_toolbar_menu, menu);
+        toolbarMenu.inflateMenu(menu);
 
         return true;
     }
@@ -66,26 +64,13 @@ public abstract class BaseDashboard extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch(item.getItemId()) {
-            case android.R.id.home : {
-                appDrawer.toggleDrawer();
-                return true;
-            }
-            case R.id.menu_keyboard : {
-                Toast.makeText(this, "Keyboard", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            case R.id.menu_left_click : {
-                Toast.makeText(this, "Left Click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            case R.id.menu_right_click : {
-                Toast.makeText(this, "Right Click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        }
+        return toolbarMenu.handleOptionsItemSelected(item);
+    }
 
-        return false;
+    @Override
+    public void onAppDrawerToggle()
+    {
+        appDrawer.toggleDrawer();
     }
 
     @Override

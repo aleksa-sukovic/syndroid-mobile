@@ -20,12 +20,16 @@ public class DashboardActivity extends BaseDashboard implements BottomNavigation
     @Override
     protected void beforeInitialization()
     {
+        super.beforeInitialization();
+
         server = getIntent().getParcelableExtra("server");
     }
 
     @Override
     protected void initialize()
     {
+        super.initialize();
+
         application = Application.getInstance(getServer().getIp(), Application.getDefaultPort());
 
         application.start();
