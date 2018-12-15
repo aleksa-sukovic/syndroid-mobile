@@ -57,4 +57,7 @@ dependencies {
 
     // Material Menu
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
+
+    // BottomNavigationView
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
 }

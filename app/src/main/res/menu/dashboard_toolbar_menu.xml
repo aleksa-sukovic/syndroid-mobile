@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_keyboard"
         android:title="@string/dashboard_toolbar_menu_keyboard_item"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:icon="@drawable/ic_keyboard"/>
     <item
         android:id="@+id/menu_left_click"

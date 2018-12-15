@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.ConnectActivity;
 import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.AppDrawer;
-import com.aleksa.syndroid.activities.dashboard.navigation.toolbar.Toolbar;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
@@ -21,35 +20,22 @@ import androidx.annotation.Nullable;
 
 public abstract class BaseDashboard extends AppCompatActivity
 {
-    private int layoutId;
-    private int darkStyleId;
-    private int optionsMenuId;
-    private int drawerLayoutId;
-    private int navigationViewId;
-
     private AppDrawer appDrawer;
-
-    public BaseDashboard(int layoutId, int darkStyleId, int drawerLayoutId, int navigationViewId, int optionsMenuId)
-    {
-        this.layoutId = layoutId;
-        this.darkStyleId = darkStyleId;
-        this.optionsMenuId = optionsMenuId;
-        this.drawerLayoutId = drawerLayoutId;
-        this.navigationViewId = navigationViewId;
-    }
+    private BottomNavigation bottomNavigation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         if (ThemeManager.isNightModeOn(this)) {
-            setTheme(darkStyleId);
+            setTheme(R.style.DashboardActivityDark);
         }
 
         beforeInitialization();
 
         super.onCreate(savedInstanceState);
-        setContentView(layoutId);
+        setContentView(R.layout.activity_dashboard);
         appDrawer = new AppDrawer(this, getServer());
+        bottomNavigation = new BottomNavigation(this);
 
         initialize();
         afterInitialization();
@@ -72,7 +58,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(optionsMenuId, menu);
+        getMenuInflater().inflate(R.menu.dashboard_toolbar_menu, menu);
 
         return true;
     }

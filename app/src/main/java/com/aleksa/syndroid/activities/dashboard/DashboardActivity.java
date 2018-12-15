@@ -3,24 +3,19 @@ package com.aleksa.syndroid.activities.dashboard;
 
 import android.widget.Toast;
 
-import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
 import com.aleksa.syndroid.objects.server.models.Server;
+import com.aleksa.syndroid.objects.unit_item.Unit;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class DashboardActivity extends BaseDashboard
+public class DashboardActivity extends BaseDashboard implements BottomNavigation.BottomNavigationListener
 {
 
     private Application application;
     private Server server;
-
-    public DashboardActivity()
-    {
-        super(R.layout.activity_dashboard, R.style.DashboardActivityDark, R.id.drawer_layout, R.id.navigation_view, R.menu.dashboard_toolbar_menu);
-    }
 
     @Override
     protected void beforeInitialization()
@@ -58,5 +53,11 @@ public class DashboardActivity extends BaseDashboard
         if (event.getEventType() == ApplicationEvent.EventCode.SERVER_DISCONNECT) {
             Toast.makeText(this, "Disconnected from server! " + event.getData(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onUnitSelect(Unit unit)
+    {
+        Toast.makeText(this, "Navigate to unit: " + unit.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }

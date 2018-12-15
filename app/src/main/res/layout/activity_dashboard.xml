@@ -15,8 +15,9 @@
         android:background="?attr/primary" />
     
     <android.support.v4.widget.DrawerLayout
-        android:layout_below="@id/toolbar"
         android:id="@+id/drawer_layout"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/background">
@@ -43,7 +44,7 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/dashboard_app_drawer_header"
             android:fitsSystemWindows="true"
-            android:background="?attr/primary_light"
+            android:background="?attr/primary_dark"
             app:itemIconTint="?attr/primary_text"
             app:itemTextColor="?attr/primary_text"
             >
@@ -51,5 +52,15 @@
         </android.support.design.widget.NavigationView>
     
     </android.support.v4.widget.DrawerLayout>
+    
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bottom_navigation"
+        android:background="?attr/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+    </com.aurelhubert.ahbottomnavigation.AHBottomNavigation>
     
 </RelativeLayout>
