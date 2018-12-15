@@ -86,7 +86,6 @@ public class Application implements WebSocketListener, Bootstrappable
     public void stop()
     {
         this.webSocket.disconnect();
-        this.activeConnection = true;
     }
 
     public void sendMessage(String message)
@@ -105,7 +104,7 @@ public class Application implements WebSocketListener, Bootstrappable
     public void onOpen()
     {
         activeConnection = true;
-        Log.d(TAG, "onOpen: ");
+        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_CONNECT, "Successfully connected to server"));
     }
 
     @Override

@@ -10,7 +10,8 @@ public class ApplicationEvent extends Event<ApplicationEvent.EventCode, String>
     public enum EventCode
     {
         SERVER_CREATION_ERROR, SERVER_CONNECTION_ERROR,
-        SERVER_DISCONNECT,
-        INCOMING_RESPONSE
+        SERVER_DISCONNECT, SERVER_CONNECT,
+        INCOMING_RESPONSE,
+        CLIENT_CONNECTED, CLIENT_DISCONNECTED,
     }
 }
