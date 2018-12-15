@@ -54,4 +54,7 @@ dependencies {
 
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+
+    // Material Menu
+    implementation 'com.balysv.materialmenu:material-menu:2.0.0'
 }

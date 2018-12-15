@@ -3,15 +3,14 @@ package com.aleksa.syndroid.activities.dashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.ConnectActivity;
-import com.aleksa.syndroid.activities.dashboard.app_drawer.AppDrawer;
-import com.aleksa.syndroid.activities.dashboard.toolbar.Toolbar;
+import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.AppDrawer;
+import com.aleksa.syndroid.activities.dashboard.navigation.toolbar.Toolbar;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
@@ -28,7 +27,6 @@ public abstract class BaseDashboard extends AppCompatActivity
     private int drawerLayoutId;
     private int navigationViewId;
 
-    private Toolbar   toolbar;
     private AppDrawer appDrawer;
 
     public BaseDashboard(int layoutId, int darkStyleId, int drawerLayoutId, int navigationViewId, int optionsMenuId)
@@ -51,12 +49,9 @@ public abstract class BaseDashboard extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(layoutId);
-
-        toolbar = new Toolbar(this, R.id.toolbar);
-        appDrawer = new AppDrawer(this, getServer(), drawerLayoutId, navigationViewId);
+        appDrawer = new AppDrawer(this, getServer());
 
         initialize();
-
         afterInitialization();
     }
 
@@ -67,7 +62,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     protected abstract void initialize();
 
     protected void afterInitialization() {
-
+        appDrawer.setServer(getServer());
     }
 
     protected abstract Application getSynDroidApplication();
@@ -87,7 +82,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     {
         switch(item.getItemId()) {
             case android.R.id.home : {
-                appDrawer.openDrawer();
+                appDrawer.toggleDrawer();
                 return true;
             }
             case R.id.menu_keyboard : {
