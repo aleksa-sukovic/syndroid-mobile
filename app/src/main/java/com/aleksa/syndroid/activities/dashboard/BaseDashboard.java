@@ -15,6 +15,8 @@ import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.annotation.Nullable;
 
 public abstract class BaseDashboard extends AppCompatActivity
@@ -119,6 +121,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     @Override
     protected void onStart()
     {
+        EventBus.getDefault().register(this);
         startSynDroidApplication();
 
         super.onStart();
@@ -128,6 +131,7 @@ public abstract class BaseDashboard extends AppCompatActivity
     protected void onStop()
     {
         stopSynDroidApplication();
+        EventBus.getDefault().unregister(this);
 
         super.onStop();
     }
