@@ -32,6 +32,7 @@ public class AppDrawer implements DrawerLayout.DrawerListener
     {
         this.activity = activity;
         this.toolbar = new Toolbar(activity);
+        this.server = server;
 
         initializeAppDrawerViews();
         initializeNavigationView();
