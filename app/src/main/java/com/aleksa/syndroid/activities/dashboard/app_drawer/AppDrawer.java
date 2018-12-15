@@ -4,9 +4,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 
 public class AppDrawer
@@ -19,6 +21,7 @@ public class AppDrawer
 
     private TextView serverName;
     private TextView serverIp;
+    private ImageView nightModeToggle;
 
     public AppDrawer(AppCompatActivity activity, Server server, int drawerLayoutId, int navigationViewId)
     {
@@ -30,6 +33,7 @@ public class AppDrawer
         initializeAppDrawerViews();
         initializeNavigationView();
         initializeAppDrawerData();
+        initializeNightModeSwitch();
     }
 
     private void initializeAppDrawerViews()
@@ -39,6 +43,7 @@ public class AppDrawer
 
         serverName = navigationView.getHeaderView(0).findViewById(R.id.server_name);
         serverIp = navigationView.getHeaderView(0).findViewById(R.id.server_ip);
+        nightModeToggle = navigationView.getHeaderView(0).findViewById(R.id.night_mode_toggle);
     }
 
     private void initializeNavigationView()
@@ -61,4 +66,25 @@ public class AppDrawer
     {
         drawerLayout.openDrawer(GravityCompat.START);
     }
+
+    private void initializeNightModeSwitch()
+    {
+        nightModeToggle.setOnClickListener(v -> {
+            toggleNightModeButtonResource();
+
+            ThemeManager.toggleNightMode(activity);
+        });
+
+       toggleNightModeButtonResource();
+    }
+
+    private void toggleNightModeButtonResource()
+    {
+        if (ThemeManager.isNightModeOn(activity)) {
+            nightModeToggle.setImageResource(R.drawable.ic_dark_mode_off);
+        } else {
+            nightModeToggle.setImageResource(R.drawable.ic_dark_mode_on);
+        }
+    }
+
 }
