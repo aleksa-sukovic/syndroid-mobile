@@ -6,7 +6,9 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
+import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectListener;
+import com.aleksa.syndroid.fragments.FragmentOrchestrator;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
 import com.aleksa.syndroid.managers.ThemeManager;
@@ -19,8 +21,9 @@ import org.greenrobot.eventbus.ThreadMode;
 public class DashboardActivity extends BaseDashboard implements UnitSelectListener
 {
 
-    private Application application;
-    private Server server;
+    private FragmentOrchestrator fragmentOrchestrator;
+    private Application          application;
+    private Server               server;
 
     @Override
     protected void beforeInitialization()
@@ -34,6 +37,8 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     protected void initialize()
     {
         super.initialize();
+
+        fragmentOrchestrator = new FragmentOrchestrator(this, R.id.fragment_container);
 
         application = Application.getInstance(getServer().getIp(), Application.getDefaultPort());
 
@@ -67,7 +72,7 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     @Override
     public void onUnitSelect(Unit unit)
     {
-        Toast.makeText(this, "Navigate to unit: " + unit.getTitle(), Toast.LENGTH_SHORT).show();
+        fragmentOrchestrator.navigateToFragment(unit);
     }
 
     @Override
