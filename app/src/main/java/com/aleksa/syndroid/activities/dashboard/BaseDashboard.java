@@ -20,9 +20,9 @@ import androidx.annotation.Nullable;
 
 public abstract class BaseDashboard extends AppCompatActivity implements ToolbarMenu.ToolbarMenuListener
 {
-    private ToolbarMenu toolbarMenu;
-    private AppDrawer appDrawer;
-    private BottomNavigation bottomNavigation;
+    protected ToolbarMenu toolbarMenu;
+    protected AppDrawer appDrawer;
+    protected BottomNavigation bottomNavigation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)

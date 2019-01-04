@@ -43,13 +43,12 @@ public class AppDrawer implements DrawerLayout.DrawerListener
     private void initializeAppDrawerViews()
     {
         drawerLayout = activity.findViewById(R.id.drawer_layout);
+        navigationView = activity.findViewById(R.id.navigation_view);
         drawerLayout.addDrawerListener(this);
 
-        navigationView = activity.findViewById(R.id.navigation_view);
-
-        serverName = navigationView.getHeaderView(0).findViewById(R.id.server_name);
-        serverIp = navigationView.getHeaderView(0).findViewById(R.id.server_ip);
-        nightModeToggle = navigationView.getHeaderView(0).findViewById(R.id.night_mode_toggle);
+        serverName = activity.findViewById(R.id.server_name);
+        serverIp = activity.findViewById(R.id.server_ip);
+        nightModeToggle = activity.findViewById(R.id.night_mode_toggle);
     }
 
     private void initializeNavigationView()

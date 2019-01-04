@@ -1,33 +1,38 @@
-package com.aleksa.syndroid.activities.dashboard.navigation.app_drawer;
+package com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list.adapters.UnitListAdapter;
+import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list.interfaces.UnitActionListener;
 import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list.interfaces.UnitSwipeTouchCallback;
+import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectListener;
 import com.aleksa.syndroid.objects.unit_item.models.Unit;
 import com.aleksa.syndroid.objects.unit_item.repositories.UnitRepository;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class UnitFragment extends Fragment implements UnitListAdapter.OnUnitSelectListener
+public class UnitFragment extends Fragment implements UnitActionListener
 {
 
     private ItemTouchHelper itemTouchHelper;
-    private UnitRepository  unitRepository;
     private UnitListAdapter unitListAdapter;
     private RecyclerView    recyclerView;
-    private OnUnitSelect    listener;
+    private UnitSelectListener    listener;
+    private UnitRepository unitRepository;
 
     public UnitFragment()
     {
@@ -66,7 +71,7 @@ public class UnitFragment extends Fragment implements UnitListAdapter.OnUnitSele
     private void refreshData()
     {
         unitRepository.all().then(data -> {
-            unitListAdapter.setServerList((List<Unit>) data);
+            unitListAdapter.setUnitList((List<Unit>) data);
 
             recyclerView.invalidate();
         });
@@ -85,11 +90,11 @@ public class UnitFragment extends Fragment implements UnitListAdapter.OnUnitSele
     {
         super.onAttach(context);
 
-        if (!(context instanceof UnitFragment.OnUnitSelect)) {
+        if (!(context instanceof UnitSelectListener)) {
             throw new RuntimeException(context.toString() + " must implement OnUnitSelect");
         }
 
-        listener = (UnitFragment.OnUnitSelect) context;
+        listener = (UnitSelectListener) context;
     }
 
     @Override
@@ -103,12 +108,14 @@ public class UnitFragment extends Fragment implements UnitListAdapter.OnUnitSele
     @Override
     public void onOrderChange(Unit one, Unit two)
     {
-        unitRepository.update(one);
-        unitRepository.update(two);
+        unitRepository.updateAll(one, two).then(response -> {
+            listener.onUnitOrderChange(one, two);
+        });
     }
 
-    public interface OnUnitSelect
+    @Override
+    public void onUnitSelect(Unit unit)
     {
-        void onUnitSelect(Unit server);
+        listener.onUnitSelect(unit);
     }
 }

@@ -1,4 +1,4 @@
-package com.aleksa.syndroid.activities.dashboard.navigation.app_drawer;
+package com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,9 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.favourites.adapters.ItemTouchHelperAdapter;
+import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list.interfaces.UnitActionListener;
 import com.aleksa.syndroid.objects.unit_item.models.Unit;
 
 import java.util.Collections;
@@ -19,10 +23,10 @@ import java.util.List;
 
 public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
-    private List<Unit>               unitList;
-    private OnUnitSelectListener actionListener;
+    private List<Unit>         unitList;
+    private UnitActionListener actionListener;
 
-    public UnitListAdapter(List<Unit> units, OnUnitSelectListener actionListener) {
+    public UnitListAdapter(List<Unit> units, UnitActionListener actionListener) {
         this.unitList     = units;
         this.actionListener = actionListener;
     }
@@ -42,6 +46,11 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
     public void onBindViewHolder(@NonNull UnitListAdapter.ViewHolder viewHolder, int i)
     {
         Unit unit = unitList.get(i);
+
+        viewHolder.name.setText(unit.getTitle());
+        viewHolder.description.setText(unit.getDescription());
+        viewHolder.icon.setImageResource(unit.getDrawable());
+        viewHolder.rootLayout.setOnClickListener(v -> actionListener.onUnitSelect(unit));
     }
 
     @Override
@@ -72,7 +81,7 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
         notifyItemRemoved(position);
     }
 
-    public void setServerList(List<Unit> list)
+    public void setUnitList(List<Unit> list)
     {
         this.unitList.clear();
         this.unitList.addAll(list);
@@ -94,13 +103,19 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        TextView name;
+        TextView description;
+        RelativeLayout rootLayout;
+        ImageView icon;
+
         ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-        }
-    }
 
-    public interface OnUnitSelectListener {
-        void onOrderChange(Unit first, Unit second);
+            name = itemView.findViewById(R.id.unit_name);
+            description = itemView.findViewById(R.id.unit_description);
+            icon = itemView.findViewById(R.id.unit_icon);
+            rootLayout = itemView.findViewById(R.id.root_layout);
+        }
     }
 }

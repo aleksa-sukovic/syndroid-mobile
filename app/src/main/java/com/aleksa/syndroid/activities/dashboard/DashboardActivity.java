@@ -1,17 +1,22 @@
 package com.aleksa.syndroid.activities.dashboard;
 
 
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.widget.Toast;
 
+import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectListener;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
+import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
-import com.aleksa.syndroid.objects.unit_item.Unit;
+import com.aleksa.syndroid.objects.unit_item.models.Unit;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class DashboardActivity extends BaseDashboard implements BottomNavigation.BottomNavigationListener
+public class DashboardActivity extends BaseDashboard implements UnitSelectListener
 {
 
     private Application application;
@@ -63,5 +68,16 @@ public class DashboardActivity extends BaseDashboard implements BottomNavigation
     public void onUnitSelect(Unit unit)
     {
         Toast.makeText(this, "Navigate to unit: " + unit.getTitle(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUnitOrderChange(Unit one, Unit two)
+    {
+        new Handler(Looper.getMainLooper()).post(() -> bottomNavigation.refreshItems());
+    }
+
+    public void switchTheme(View view)
+    {
+        ThemeManager.toggleNightMode(this);
     }
 }
