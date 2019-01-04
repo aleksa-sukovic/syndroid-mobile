@@ -84,12 +84,14 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
 
     private void togglePlaceholderText()
     {
-       if (favouritesAdapter.getServerList().size() < 1) {
-           placeholderText.setVisibility(View.VISIBLE);
-           return;
-       }
+       new Handler(Looper.getMainLooper()).post(() -> {
+           if (favouritesAdapter.getServerList().size() < 1) {
+               placeholderText.setVisibility(View.VISIBLE);
+               return;
+           }
 
-       placeholderText.setVisibility(View.GONE);
+           placeholderText.setVisibility(View.GONE);
+       });
     }
 
     @Override
