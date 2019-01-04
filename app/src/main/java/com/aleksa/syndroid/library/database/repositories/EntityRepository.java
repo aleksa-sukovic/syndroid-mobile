@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EntityRepository<Entity, DaoObject extends BaseDao<Entity>>
 {
-    private DaoObject daoObject;
+    protected DaoObject daoObject;
 
     protected EntityRepository()
     {

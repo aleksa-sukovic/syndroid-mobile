@@ -2,12 +2,12 @@ package com.aleksa.syndroid.library.database.dao;
 
 import java.util.List;
 
-public interface BaseDao<T>
+public interface BaseDao<Entity>
 {
-    List<T> all();
-    T one(long id);
-    void update(T object);
-    void delete(T object);
-    long insert(T object);
+    List<Entity> all();
+    Entity one(long id);
+    void update(Entity object);
+    void delete(Entity object);
+    long insert(Entity object);
     void deleteAll();
 }

@@ -13,6 +13,7 @@ public class ServerRepository extends EntityRepository<Server, ServerDao>
 
     public ServerRepository(Application application) {
         SynDroidDatabase database = SynDroidDatabase.getDatabase(application);
+
         setDaoObject(database.serverDao());
     }
 

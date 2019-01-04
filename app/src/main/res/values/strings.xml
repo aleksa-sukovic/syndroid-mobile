@@ -22,4 +22,5 @@
     <string name="dashboard_toolbar_menu_left_click_item">Left Click</string>
     <string name="dashboard_toolbar_menu_right_click_item">Right Click</string>
     <string name="dashboard_app_drawer_title_2">Client</string>
+    <string name="dashboard_app_drawer_instructions">Long press and drag to order items. First five will be displayed in bottom navigation.</string>
 </resources>

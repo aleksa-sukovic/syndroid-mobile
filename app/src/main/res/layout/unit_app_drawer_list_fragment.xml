@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.connect.favourites.FavouritesFragment">
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/caption_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="?attr/primary"
+        >
+        <TextView
+            android:id="@+id/caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard_app_drawer_instructions"
+            android:textAlignment="center"
+            android:textColor="?attr/icons"
+            android:fontFamily="@font/roboto_light"
+            />
+    </FrameLayout>
     
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/caption_container"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        />
-    
-    <TextView
-        android:id="@+id/placeholder_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/favourites_fragment_placeholder_text"
-        android:textColor="?attr/icons"
-        android:fontFamily="@font/roboto_thin"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp"
-        android:layout_centerInParent="true"
-        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
         />
 
 </RelativeLayout>
