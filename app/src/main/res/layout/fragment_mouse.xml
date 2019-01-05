@@ -13,4 +13,57 @@
         android:fontFamily="@font/roboto_thin"
         />
     
+    <LinearLayout
+        android:clickable="false"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:textSize="14sp"
+            android:textColor="?attr/primary_text"
+            android:text="@string/fragment_mouse_manual_1"
+            />
+    
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:textColor="?attr/primary_text"
+            android:textSize="14sp"
+            android:text="@string/fragment_mouse_manual_2"
+            />
+    
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:textColor="?attr/primary_text"
+            android:textSize="14sp"
+            android:text="@string/fragment_mouse_manual_3"
+            />
+    
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_thin"
+            android:textColor="?attr/primary_text"
+            android:textSize="14sp"
+            android:text="@string/fragment_mouse_manual_4"
+            />
+        
+    </LinearLayout>
+    
 </FrameLayout>

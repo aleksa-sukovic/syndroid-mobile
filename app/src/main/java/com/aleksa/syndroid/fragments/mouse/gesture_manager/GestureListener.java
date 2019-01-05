@@ -6,4 +6,5 @@ public interface GestureListener
     void onScroll(float yOffset);
     void onLongPress();
     void onTapUp();
+    void onDoubleTap();
 }

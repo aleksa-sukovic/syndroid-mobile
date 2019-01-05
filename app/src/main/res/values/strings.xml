@@ -23,4 +23,8 @@
     <string name="dashboard_toolbar_menu_right_click_item">Right Click</string>
     <string name="dashboard_app_drawer_title_2">Client</string>
     <string name="dashboard_app_drawer_instructions">Long press and drag to order items. First five will be displayed in bottom navigation.</string>
+    <string name="fragment_mouse_manual_1">Use your finger to control the mouse</string>
+    <string name="fragment_mouse_manual_2">Tap to do left click</string>
+    <string name="fragment_mouse_manual_3">Two finger tap to do right click</string>
+    <string name="fragment_mouse_manual_4">Use two fingers to scroll</string>
 </resources>

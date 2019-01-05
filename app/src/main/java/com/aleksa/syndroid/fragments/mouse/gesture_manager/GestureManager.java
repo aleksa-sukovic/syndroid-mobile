@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-public class GestureManager implements GestureDetector.OnGestureListener
+public class GestureManager implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener
 {
     private GestureDetectorCompat gestureDetector;
     private GestureListener listener;
@@ -32,15 +32,13 @@ public class GestureManager implements GestureDetector.OnGestureListener
     @Override
     public boolean onSingleTapUp(MotionEvent e)
     {
-        listener.onTapUp();
-
         return true;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
     {
-        if (e1.getPointerCount() == 1) {
+        if (e2.getPointerCount() == 1) {
             listener.onMove(distanceX, distanceY);
         } else {
             listener.onScroll(distanceY);
@@ -64,5 +62,27 @@ public class GestureManager implements GestureDetector.OnGestureListener
     public void onTouchEvent(MotionEvent event)
     {
         gestureDetector.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e)
+    {
+        listener.onTapUp();
+
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent e)
+    {
+        listener.onDoubleTap();
+
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent e)
+    {
+        return false;
     }
 }

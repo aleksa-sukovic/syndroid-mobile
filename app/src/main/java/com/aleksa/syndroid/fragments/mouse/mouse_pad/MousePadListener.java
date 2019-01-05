@@ -6,4 +6,6 @@ public interface MousePadListener
     void onDragStart();
     void onDragEnd();
     void onLeftClick();
+    void onRightClick();
+    void onScroll(float yOffset);
 }

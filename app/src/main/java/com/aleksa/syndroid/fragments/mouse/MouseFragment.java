@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GestureDetectorCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,5 +66,21 @@ public class MouseFragment extends Fragment implements MousePadListener
     {
         EventBus.getDefault().post(new OutgoingRequest.Builder()
             .setRoutePath("/mouse/left-click").build());
+    }
+
+    @Override
+    public void onRightClick()
+    {
+        EventBus.getDefault().post(new OutgoingRequest.Builder()
+            .setRoutePath("/mouse/right-click").build());
+    }
+
+    @Override
+    public void onScroll(float yOffset)
+    {
+        EventBus.getDefault().post(new OutgoingRequest.Builder()
+            .setRoutePath("/mouse/scroll")
+            .addParam("amount", Float.toString(yOffset))
+            .build());
     }
 }
