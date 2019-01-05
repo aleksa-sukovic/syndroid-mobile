@@ -6,45 +6,34 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MousePad extends android.support.v7.widget.AppCompatTextView implements View.OnTouchListener
+import com.aleksa.syndroid.fragments.mouse.gesture_manager.GestureListener;
+import com.aleksa.syndroid.fragments.mouse.gesture_manager.GestureManager;
+
+public class MousePad extends android.support.v7.widget.AppCompatTextView implements GestureListener, View.OnTouchListener
 {
-
+    private GestureManager gestureManager;
     private MousePadListener listener;
-
-    {
-        setOnTouchListener(this);
-    }
+    private boolean clickNdrag;
 
     public MousePad(Context context)
     {
         super(context);
+        gestureManager = new GestureManager(context, this);
+        setOnTouchListener(this);
     }
 
     public MousePad(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        gestureManager = new GestureManager(context, this);
+        setOnTouchListener(this);
     }
 
     public MousePad(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event)
-    {
-        if (event.getHistorySize() < 2) {
-            return true;
-        }
-
-        float x = event.getHistoricalX(0) - event.getX();
-        float y = event.getHistoricalY(0) - event.getY();
-
-        if (listener != null) {
-            listener.onMove(x, y);
-        }
-
-        return true;
+        gestureManager = new GestureManager(context, this);
+        setOnTouchListener(this);
     }
 
     public void setMousePadListener(MousePadListener listener)
@@ -52,4 +41,45 @@ public class MousePad extends android.support.v7.widget.AppCompatTextView implem
         this.listener = listener;
     }
 
+    @Override
+    public void onMove(float xOffset, float yOffset)
+    {
+        listener.onMove(xOffset, yOffset);
+    }
+
+    @Override
+    public void onScroll(float yOffset)
+    {
+
+    }
+
+    @Override
+    public void onLongPress()
+    {
+        clickNdrag = !clickNdrag;
+
+        if (clickNdrag) {
+            listener.onDragStart();
+        } else {
+            listener.onDragEnd();
+        }
+    }
+
+    @Override
+    public void onTapUp()
+    {
+        if (clickNdrag) {
+            listener.onDragEnd();
+            clickNdrag = false;
+        } else {
+            listener.onLeftClick();
+        }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
+        gestureManager.onTouchEvent(event);
+        return true;
+    }
 }

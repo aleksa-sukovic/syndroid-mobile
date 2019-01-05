@@ -11,6 +11,7 @@ import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectL
 import com.aleksa.syndroid.fragments.FragmentOrchestrator;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
+import com.aleksa.syndroid.library.router.request.OutgoingRequest;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.unit_item.models.Unit;
@@ -67,6 +68,12 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
         if (event.getEventType() == ApplicationEvent.EventCode.SERVER_DISCONNECT) {
             Toast.makeText(this, "Disconnected from server! " + event.getData(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void onOutgoingRequest(OutgoingRequest request)
+    {
+        application.send(request);
     }
 
     @Override
