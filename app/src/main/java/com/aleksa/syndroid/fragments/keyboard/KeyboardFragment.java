@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.managers.KeyboardManager;
 
 public class KeyboardFragment extends Fragment
 {
@@ -16,6 +17,10 @@ public class KeyboardFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_keyboard, container, false);
+        View view =  inflater.inflate(R.layout.fragment_keyboard, container, false);
+
+        KeyboardManager.showKeyboard(getContext());
+
+        return view;
     }
 }
