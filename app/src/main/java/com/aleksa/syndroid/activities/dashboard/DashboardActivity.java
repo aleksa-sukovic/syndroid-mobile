@@ -3,6 +3,7 @@ package com.aleksa.syndroid.activities.dashboard;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.unit_item.models.Unit;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -86,6 +88,27 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     public void onUnitOrderChange(Unit one, Unit two)
     {
         new Handler(Looper.getMainLooper()).post(() -> bottomNavigation.refreshItems());
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event)
+    {
+        int code = event.getUnicodeChar();
+
+        OutgoingRequest.Builder requestBuilder = new OutgoingRequest.Builder();
+        requestBuilder.setRoutePath("/keyboard/type");
+        requestBuilder.addParam("key", Integer.toString(code));
+
+        if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT) {
+            requestBuilder.addParam("shift", "true");
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_DEL) {
+            requestBuilder.addParam("backspace", "true");
+        }
+
+        EventBus.getDefault().post(requestBuilder.build());
+        return true;
     }
 
     public void switchTheme(View view)
