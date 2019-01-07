@@ -103,9 +103,4 @@ public class MousePad extends android.support.v7.widget.AppCompatTextView implem
     {
         this.naturalScrolling = enabled ? -1 : 1;
     }
-
-    public boolean usesNaturalScrolling()
-    {
-        return naturalScrolling == -1;
-    }
 }

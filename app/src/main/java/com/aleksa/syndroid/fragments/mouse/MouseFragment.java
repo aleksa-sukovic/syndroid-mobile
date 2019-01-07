@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.fragments.mouse.mouse_pad.MousePad;
@@ -26,6 +27,7 @@ public class MouseFragment extends Fragment implements MousePadListener
         View view = inflater.inflate(R.layout.fragment_mouse, container, false);
 
         initializeMousePad(view);
+        initializeMouseButtons(view);
 
         return view;
     }
@@ -34,6 +36,12 @@ public class MouseFragment extends Fragment implements MousePadListener
     {
         mousePad = view.findViewById(R.id.mouse_pad);
         mousePad.setMousePadListener(this);
+    }
+
+    private void initializeMouseButtons(View view)
+    {
+        view.findViewById(R.id.mouse_left_click).setOnClickListener(v -> onLeftClick());
+        view.findViewById(R.id.mouse_right_click).setOnClickListener(v -> onRightClick());
     }
 
     @Override
