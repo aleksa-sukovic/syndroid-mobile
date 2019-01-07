@@ -28,4 +28,6 @@
     <string name="fragment_mouse_manual_3">Tree finger tap to do right click</string>
     <string name="fragment_mouse_manual_4">Use two fingers to scroll</string>
     <string name="fragment_mouse_manual_5">Tap and hold to click \'n\' drag</string>
+    <string name="fragment_media_unmute">Unmute Volume</string>
+    <string name="fragment_media_mute">Mute Volume</string>
 </resources>
