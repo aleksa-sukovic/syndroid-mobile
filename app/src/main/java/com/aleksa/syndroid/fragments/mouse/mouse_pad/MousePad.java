@@ -82,6 +82,12 @@ public class MousePad extends android.support.v7.widget.AppCompatTextView implem
     @Override
     public void onDoubleTap()
     {
+        listener.onDoubleTap();
+    }
+
+    @Override
+    public void onTwoFingerTap()
+    {
         listener.onRightClick();
     }
 

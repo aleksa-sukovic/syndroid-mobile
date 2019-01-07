@@ -8,4 +8,5 @@ public interface MousePadListener
     void onLeftClick();
     void onRightClick();
     void onScroll(float yOffset);
+    void onDoubleTap();
 }

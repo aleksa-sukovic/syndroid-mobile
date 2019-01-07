@@ -7,4 +7,5 @@ public interface GestureListener
     void onLongPress();
     void onTapUp();
     void onDoubleTap();
+    void onTwoFingerTap();
 }

@@ -83,4 +83,12 @@ public class MouseFragment extends Fragment implements MousePadListener
             .addParam("amount", Float.toString(yOffset))
             .build());
     }
+
+    @Override
+    public void onDoubleTap()
+    {
+        EventBus.getDefault().post(new OutgoingRequest.Builder()
+            .setRoutePath("/mouse/double-left-click")
+            .build());
+    }
 }
