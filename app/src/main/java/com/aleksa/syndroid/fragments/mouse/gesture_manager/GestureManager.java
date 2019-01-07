@@ -40,8 +40,10 @@ public class GestureManager implements GestureDetector.OnGestureListener, Gestur
     {
         if (e2.getPointerCount() == 1) {
             listener.onMove(distanceX, distanceY);
-        } else {
+        } else if (e2.getPointerCount() == 2) {
             listener.onScroll(distanceY);
+        } else {
+            listener.onTwoFingerTap();
         }
 
         return true;
