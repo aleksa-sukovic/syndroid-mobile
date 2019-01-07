@@ -131,7 +131,7 @@ public class Application implements WebSocketListener, Bootstrappable
     {
         activeConnection = false;
         Log.d(TAG, "onClosed: ");
-        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Connection with server closed successfully"));
+        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected"));
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Application implements WebSocketListener, Bootstrappable
     {
         activeConnection = false;
         Log.d(TAG, "onFailure: application");
-        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Connection with server closed violently"));
+        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected"));
     }
 
     @Override
