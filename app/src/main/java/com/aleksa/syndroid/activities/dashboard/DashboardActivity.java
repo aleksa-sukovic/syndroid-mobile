@@ -108,7 +108,8 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
         }
 
         EventBus.getDefault().post(requestBuilder.build());
-        return true;
+
+        return super.onKeyUp(keyCode, event);
     }
 
     public void switchTheme(View view)
