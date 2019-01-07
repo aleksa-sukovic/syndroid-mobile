@@ -12,6 +12,7 @@ import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectL
 import com.aleksa.syndroid.fragments.FragmentOrchestrator;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
+import com.aleksa.syndroid.library.managers.KeyPressManager;
 import com.aleksa.syndroid.library.router.request.OutgoingRequest;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
@@ -27,6 +28,7 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     private FragmentOrchestrator fragmentOrchestrator;
     private Application          application;
     private Server               server;
+    private KeyPressManager      keyPressManager;
 
     @Override
     protected void beforeInitialization()
@@ -34,6 +36,7 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
         super.beforeInitialization();
 
         server = getIntent().getParcelableExtra("server");
+        keyPressManager = new KeyPressManager();
     }
 
     @Override
@@ -93,21 +96,7 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event)
     {
-        int code = event.getUnicodeChar();
-
-        OutgoingRequest.Builder requestBuilder = new OutgoingRequest.Builder();
-        requestBuilder.setRoutePath("/keyboard/type");
-        requestBuilder.addParam("key", Integer.toString(code));
-
-        if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT) {
-            requestBuilder.addParam("shift", "true");
-        }
-
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            requestBuilder.addParam("backspace", "true");
-        }
-
-        EventBus.getDefault().post(requestBuilder.build());
+        EventBus.getDefault().post(keyPressManager.constructRequest(keyCode, event));
 
         return super.onKeyUp(keyCode, event);
     }
