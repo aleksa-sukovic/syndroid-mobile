@@ -76,11 +76,11 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     public void onServerStateChange(ApplicationEvent event)
     {
         if (event.getEventType() == ApplicationEvent.EventCode.SERVER_CONNECT) {
-            Toast.makeText(this, "Connected to server!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         }
 
         if (event.getEventType() == ApplicationEvent.EventCode.SERVER_DISCONNECT) {
-            Toast.makeText(this, "Disconnected from server! " + event.getData(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, event.getData(), Toast.LENGTH_SHORT).show();
         }
     }
 

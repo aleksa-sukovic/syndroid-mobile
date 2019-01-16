@@ -66,6 +66,8 @@ public class SocketManager implements Manager<String, String>
 
     public void stop()
     {
-        this.requestManager.cleanUp();
+        if (this.requestManager != null) {
+            this.requestManager.cleanUp();
+        }
     }
 }

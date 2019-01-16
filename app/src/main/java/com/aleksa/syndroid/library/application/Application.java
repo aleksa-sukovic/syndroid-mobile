@@ -88,8 +88,13 @@ public class Application implements WebSocketListener, Bootstrappable
     {
         this.context = null;
 
-        this.manager.stop();
-        this.webSocket.disconnect();
+        if (this.manager != null) {
+            this.manager.stop();
+        }
+
+        if (this.webSocket != null) {
+            this.webSocket.disconnect();
+        }
     }
 
     public void sendMessage(String message)
@@ -100,7 +105,7 @@ public class Application implements WebSocketListener, Bootstrappable
     public void send(OutgoingRequest request)
     {
         String message = manager.prepareOutgoingRequest(request);
-        Log.d("Application", "send => " + message);
+
         sendMessage(message);
     }
 
