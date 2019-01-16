@@ -12,8 +12,8 @@ public class FileServiceProvider implements ServiceProvider
     public List<Route> getRoutes()
     {
         return Arrays.asList(
-            new Route("/files/list", "com.aleksa.syndroid.objects.file.controllers.FileController", "list"),
-            new Route("/files/show", "com.aleksa.syndroid.objects.file.controllers.FileController", "show")
+            new Route("/files/list", "com.aleksa.syndroid.objects.file.controllers.BatteryController", "list"),
+            new Route("/files/show", "com.aleksa.syndroid.objects.file.controllers.BatteryController", "show")
         );
     }
 }

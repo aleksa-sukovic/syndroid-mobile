@@ -17,7 +17,7 @@ public class FileController extends BaseController
 
     public String list(IncomingRequest request)
     {
-        Log.d("Application", "FileController -> list method");
+        Log.d("Application", "BatteryController -> list method");
 
         Map<String, String> params = new HashMap<>();
 
@@ -29,7 +29,7 @@ public class FileController extends BaseController
 
     public String show(IncomingRequest request)
     {
-        Log.d("Application", "FileController -> show method");
+        Log.d("Application", "BatteryController -> show method");
 
         Map<String, String> params = new HashMap<>();
 

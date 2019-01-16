@@ -1,5 +1,6 @@
 package com.aleksa.syndroid.library.providers;
 
+import com.aleksa.syndroid.objects.battery.BatteryServiceProvider;
 import com.aleksa.syndroid.objects.file.FileServiceProvider;
 
 import java.util.Arrays;
@@ -11,7 +12,8 @@ public class ServiceProviderContainer
 
     {
         serviceProviders = Arrays.asList(
-            FileServiceProvider.class
+            FileServiceProvider.class,
+            BatteryServiceProvider.class
         );
     }
 
