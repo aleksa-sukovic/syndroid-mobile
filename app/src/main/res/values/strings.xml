@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SynDroid</string>
-    <string name="app_name_spaced">S y n D r o i d</string>
     <string name="app_claim">synchronize everything</string>
     <string name="connect_activity_btn_connect_img">Scan and connect button</string>
     <string name="connect_activity_scan_btn">Scan and connect</string>
