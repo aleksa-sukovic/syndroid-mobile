@@ -1,5 +1,6 @@
 package com.aleksa.syndroid.objects.battery.controllers;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.aleksa.syndroid.library.controllers.BaseController;
@@ -15,7 +16,7 @@ public class BatteryController extends BaseController
         validator = new BatteryValidator();
     }
 
-    public String batteryPercentage(IncomingRequest request)
+    public String batteryPercentage(Context context, IncomingRequest request)
     {
         Log.d("Application", "BatteryController -> battery percentage");
 

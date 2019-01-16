@@ -53,7 +53,7 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
 
         fragmentOrchestrator = new FragmentOrchestrator(this, R.id.fragment_container);
 
-        application = Application.getInstance(getServer().getIp(), Application.getDefaultPort());
+        application = Application.getInstance(this, getServer().getIp(), Application.getDefaultPort());
 
         application.start();
     }

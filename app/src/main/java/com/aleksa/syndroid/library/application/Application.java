@@ -1,5 +1,6 @@
 package com.aleksa.syndroid.library.application;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -25,6 +26,7 @@ public class Application implements WebSocketListener, Bootstrappable
 {
     private static final String      TAG = "Application";
     private static       Application instance;
+    private Context context;
 
     private String                                  ip;
     private int                                     port;
@@ -34,13 +36,13 @@ public class Application implements WebSocketListener, Bootstrappable
     private SocketManager                           manager;
     private ExceptionHandler<BaseException, String> exceptionHandler;
 
-    public static Application getInstance(String ip, int port)
+    public static Application getInstance(Context context, String ip, int port)
     {
         if(instance == null) {
-            instance = new Application(ip, port);
+            instance = new Application(context, ip, port);
         } else if (!instance.ip.equals(ip)) {
             instance.stop();
-            instance = new Application(ip, port);
+            instance = new Application(context, ip, port);
         }
 
         return instance;
@@ -51,12 +53,13 @@ public class Application implements WebSocketListener, Bootstrappable
         return instance;
     }
 
-    private Application(String ip, int port)
+    private Application(Context context, String ip, int port)
     {
         bootstrapApplication();
 
         this.ip = ip;
         this.port = port;
+        this.context = context;
         this.exceptionHandler = new SocketExceptionHandler();
     }
 
@@ -79,7 +82,7 @@ public class Application implements WebSocketListener, Bootstrappable
         }
 
         this.webSocket = new WebSocket(ip, port, this);
-        this.manager = new SocketManager((List<Route>) serviceProviderData.get(Bootstrapper.Data.ROUTES));
+        this.manager = new SocketManager(context, (List<Route>) serviceProviderData.get(Bootstrapper.Data.ROUTES));
 
         this.webSocket.connect();
 
@@ -88,6 +91,9 @@ public class Application implements WebSocketListener, Bootstrappable
 
     public void stop()
     {
+        this.context = null;
+
+        this.manager.stop();
         this.webSocket.disconnect();
     }
 

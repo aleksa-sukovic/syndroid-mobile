@@ -1,5 +1,6 @@
 package com.aleksa.syndroid.objects.file.controllers;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.aleksa.syndroid.library.controllers.BaseController;
@@ -15,7 +16,7 @@ public class FileController extends BaseController
         validator = new FileValidator();
     }
 
-    public String list(IncomingRequest request)
+    public String list(Context context, IncomingRequest request)
     {
         Log.d("Application", "BatteryController -> list method");
 

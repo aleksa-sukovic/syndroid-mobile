@@ -1,5 +1,7 @@
 package com.aleksa.syndroid.library.managers;
 
+import android.content.Context;
+
 import com.aleksa.syndroid.library.controllers.BaseController;
 import com.aleksa.syndroid.library.controllers.exceptions.HandlerNotFoundException;
 import com.aleksa.syndroid.library.exceptions.InvalidRouteException;
@@ -15,10 +17,12 @@ public class RequestManager implements Manager<String, String>
 {
 
     private Router router;
+    private Context context;
 
-    RequestManager(List<Route> availableRoutes)
+    RequestManager(Context context, List<Route> availableRoutes)
     {
         this.router = new Router(availableRoutes);
+        this.context = context;
     }
 
     @Override
@@ -28,7 +32,11 @@ public class RequestManager implements Manager<String, String>
 
         BaseController controller = request.getRoute().getController();
 
-        return controller.handle(request);
+        return controller.handle(this.context, request);
     }
 
+    public void cleanUp()
+    {
+        this.context = null;
+    }
 }

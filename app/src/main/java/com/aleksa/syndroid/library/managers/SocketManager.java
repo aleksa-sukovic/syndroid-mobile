@@ -1,5 +1,7 @@
 package com.aleksa.syndroid.library.managers;
 
+import android.content.Context;
+
 import com.aleksa.syndroid.library.controllers.exceptions.HandlerNotFoundException;
 import com.aleksa.syndroid.library.exceptions.InvalidRouteException;
 import com.aleksa.syndroid.library.exceptions.RouteNotFoundException;
@@ -18,9 +20,9 @@ public class SocketManager implements Manager<String, String>
     private ResponseManager responseManager;
     private RouteParser routeParser;
 
-    public SocketManager(List<Route> availableRoutes)
+    public SocketManager(Context context, List<Route> availableRoutes)
     {
-        requestManager = new RequestManager(availableRoutes);
+        requestManager = new RequestManager(context, availableRoutes);
         responseManager = new ResponseManager();
         routeParser = new RouteParser();
     }
@@ -60,5 +62,10 @@ public class SocketManager implements Manager<String, String>
         {
             return false;
         }
+    }
+
+    public void stop()
+    {
+        this.requestManager.cleanUp();
     }
 }

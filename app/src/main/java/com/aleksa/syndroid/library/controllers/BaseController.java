@@ -1,5 +1,7 @@
 package com.aleksa.syndroid.library.controllers;
 
+import android.content.Context;
+
 import com.aleksa.syndroid.library.controllers.exceptions.HandlerNotFoundException;
 import com.aleksa.syndroid.library.router.request.IncomingRequest;
 import com.aleksa.syndroid.library.router.request.Request;
@@ -17,7 +19,7 @@ abstract public class BaseController
 {
     protected BaseValidator validator;
 
-    public String handle(IncomingRequest request) throws HandlerNotFoundException, ValidationException
+    public String handle(Context context, IncomingRequest request) throws HandlerNotFoundException, ValidationException
     {
         Method handler = getHandler(request.getRoute().getHandler());
         if (handler == null) {
@@ -27,7 +29,8 @@ abstract public class BaseController
         this.validator.validate(request);
 
         try {
-            String response = (String) handler.invoke(this, request);
+            String response = (String) handler.invoke(this, context, request);
+
             if (request.expectsResponse()) {
                 return response;
             }
@@ -77,7 +80,7 @@ abstract public class BaseController
     {
         try
         {
-            return getClass().getMethod(handler, IncomingRequest.class);
+            return getClass().getMethod(handler, Context.class, IncomingRequest.class);
         }
         catch(NoSuchMethodException e)
         {
