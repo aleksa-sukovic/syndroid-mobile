@@ -22,6 +22,8 @@
         <item name="connect_btn">@drawable/ic_connect_btn_light</item>
         <item name="background_image">@drawable/ic_background_light</item>
         <item name="favourites_item_bg">@drawable/ic_favourites_item_background_light</item>
+        <item name="media_play">@drawable/ic_play_circle_light</item>
+        <item name="media_arrow">@drawable/ic_media_arrow_light</item>
     </style>
     
     <!-- Dark base application theme. -->
@@ -46,6 +48,8 @@
         <item name="connect_btn">@drawable/ic_connect_btn_dark</item>
         <item name="background_image">@drawable/ic_background_dark</item>
         <item name="favourites_item_bg">@drawable/ic_favourites_item_background_dark</item>
+        <item name="media_play">@drawable/ic_play_circle_dark</item>
+        <item name="media_arrow">@drawable/ic_media_arrow_dark</item>
     </style>
     
     <!--Connect Activity-->

@@ -1,10 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
   
+    <!--Instructions-->
+    <LinearLayout
+        android:id="@+id/instruction_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="?attr/primary_light"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="@string/fragment_media_instruction_1"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="14sp"
+            android:textColor="?attr/icons"
+            android:layout_marginBottom="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="@string/fragment_media_instruction_2"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="14sp"
+            android:textColor="?attr/icons"
+            />
+    </LinearLayout>
+    
+    <!--Media Control-->
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/media_playback"
+        android:layout_below="@id/instruction_container"
+        android:layout_above="@id/volume_control"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        
+        <ImageView
+            android:id="@+id/play_button"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="?attr/media_play"
+            tools:ignore="ContentDescription" />
+        
+        <ImageView
+            android:id="@+id/media_back"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/play_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="?attr/media_arrow"
+            tools:ignore="ContentDescription" />
+    
+        <ImageView
+            android:id="@+id/media_forward"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintLeft_toRightOf="@id/play_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="?attr/media_arrow"
+            android:rotation="180"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/media_up"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/play_button"
+            android:rotation="90"
+            android:src="?attr/media_arrow"
+            tools:ignore="ContentDescription" />
+        
+        <ImageView
+            android:id="@+id/media_down"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/play_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:rotation="-90"
+            android:src="?attr/media_arrow"
+            tools:ignore="ContentDescription" />
+        
+    </android.support.constraint.ConstraintLayout>
+    
     <RelativeLayout
-        android:layout_gravity="bottom"
+        android:id="@+id/volume_control"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/primary_light"
@@ -34,7 +141,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="8dp"
-            android:layout_marginEnd="32dp  "
+            android:layout_marginEnd="32dp"
             android:src="@drawable/ic_volume_up"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
@@ -42,4 +149,4 @@
     
     </RelativeLayout>
     
-</FrameLayout>
+</RelativeLayout>

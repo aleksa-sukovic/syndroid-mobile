@@ -30,4 +30,6 @@
     <string name="fragment_mouse_manual_5">Tap and hold to click \'n\' drag</string>
     <string name="fragment_media_unmute">Unmute Volume</string>
     <string name="fragment_media_mute">Mute Volume</string>
+    <string name="fragment_media_instruction_1">You can change or mute volume</string>
+    <string name="fragment_media_instruction_2">Use control buttons to control general media</string>
 </resources>

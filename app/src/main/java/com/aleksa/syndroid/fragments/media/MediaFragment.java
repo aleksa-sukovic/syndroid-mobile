@@ -31,6 +31,16 @@ public class MediaFragment extends Fragment
         view.findViewById(R.id.volume_down).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/volume/down").build()));
 
         view.findViewById(R.id.volume_up).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/volume/up").build()));
+
+        view.findViewById(R.id.play_button).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/play-pause").build()));
+
+        view.findViewById(R.id.media_back).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/back").build()));
+
+        view.findViewById(R.id.media_forward).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/forward").build()));
+
+        view.findViewById(R.id.media_up).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/up").build()));
+
+        view.findViewById(R.id.media_down).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/down").build()));
     }
 
 
