@@ -60,4 +60,7 @@ dependencies {
 
     // BottomNavigationView
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+
+    // FlexBox Layout
+    implementation 'com.google.android:flexbox:1.1.0'
 }
