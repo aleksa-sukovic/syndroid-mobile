@@ -103,6 +103,14 @@ public abstract class BaseDashboard extends AppCompatActivity implements Toolbar
         super.onStop();
     }
 
+    @Override
+    protected void onPause()
+    {
+        stopSynDroidApplication();
+
+        super.onPause();
+    }
+
     protected void startSynDroidApplication()
     {
         Application application = getSynDroidApplication();
