@@ -15,4 +15,7 @@
         <attr name="media_play" format="integer" />
         <attr name="media_arrow" format="integer" />
     </declare-styleable>
+    <declare-styleable name="KeyboardButton">
+        <attr name="text" format="string" />
+    </declare-styleable>
 </resources>
