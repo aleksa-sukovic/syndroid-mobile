@@ -35,8 +35,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_keyboard_button_dark" />
-                            <entry key="sourceFile" value="$USER_HOME$/Desktop/keyboard_button_dark.svg" />
+                            <entry key="outputName" value="ic_triangle_light" />
+                            <entry key="sourceFile" value="$USER_HOME$/Desktop/ic_triangle_light.svg" />
                           </map>
                         </option>
                       </PersistentState>

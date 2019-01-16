@@ -29,7 +29,7 @@ public class EscapeButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "escape";
     }

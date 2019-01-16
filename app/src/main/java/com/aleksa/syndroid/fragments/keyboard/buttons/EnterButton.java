@@ -29,7 +29,7 @@ public class EnterButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "enter";
     }

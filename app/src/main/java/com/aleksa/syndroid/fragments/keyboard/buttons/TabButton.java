@@ -29,7 +29,7 @@ public class TabButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "tab";
     }

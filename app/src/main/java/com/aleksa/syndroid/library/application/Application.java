@@ -96,7 +96,7 @@ public class Application implements WebSocketListener, Bootstrappable
     public void send(OutgoingRequest request)
     {
         String message = manager.prepareOutgoingRequest(request);
-
+        Log.d("Application", "send => " + message);
         sendMessage(message);
     }
 

@@ -29,7 +29,7 @@ public class PageUpButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "pageup";
     }

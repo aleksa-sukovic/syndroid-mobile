@@ -24,6 +24,7 @@
         <item name="favourites_item_bg">@drawable/ic_favourites_item_background_light</item>
         <item name="media_play">@drawable/ic_play_circle_light</item>
         <item name="media_arrow">@drawable/ic_media_arrow_light</item>
+        <item name="triangle">@drawable/ic_triangle_light</item>
     </style>
     
     <!-- Dark base application theme. -->
@@ -50,6 +51,7 @@
         <item name="favourites_item_bg">@drawable/ic_favourites_item_background_dark</item>
         <item name="media_play">@drawable/ic_play_circle_dark</item>
         <item name="media_arrow">@drawable/ic_media_arrow_dark</item>
+        <item name="triangle">@drawable/ic_triangle_dark</item>
     </style>
     
     <!--Connect Activity-->

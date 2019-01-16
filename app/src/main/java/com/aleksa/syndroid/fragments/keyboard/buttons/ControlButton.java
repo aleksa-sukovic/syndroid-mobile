@@ -29,7 +29,7 @@ public class ControlButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "control";
     }

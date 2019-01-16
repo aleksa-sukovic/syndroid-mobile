@@ -14,6 +14,7 @@
         <attr name="favourites_item_bg" format="integer" />
         <attr name="media_play" format="integer" />
         <attr name="media_arrow" format="integer" />
+        <attr name="triangle" format="integer" />
     </declare-styleable>
     <declare-styleable name="KeyboardButton">
         <attr name="text" format="string" />

@@ -29,7 +29,7 @@ public class EndButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "end";
     }

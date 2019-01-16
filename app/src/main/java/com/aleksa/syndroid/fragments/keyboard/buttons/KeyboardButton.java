@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.library.events.KeyboardModifierEvent;
 import com.aleksa.syndroid.library.router.request.OutgoingRequest;
 import com.aleksa.syndroid.managers.ThemeManager;
 
@@ -28,10 +30,9 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
     {
         setOnClickListener(this);
         setOnLongClickListener(this);
-        setForegroundGravity(Gravity.CENTER);
     }
 
-    protected abstract String getKeyCode();
+    public abstract String getKeyCode();
 
     public KeyboardButton(@NonNull Context context)
     {
@@ -68,6 +69,8 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
     {
         setBackground(getBackgroundDrawable(context));
 
+        onToggleStateChange();
+
         addTextView(context);
     }
 
@@ -99,7 +102,17 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
 
         setBackground(getBackgroundDrawable(getContext()));
 
+        onToggleStateChange();
+
         return true;
+    }
+
+    private void onToggleStateChange()
+    {
+        EventBus.getDefault().post(new KeyboardModifierEvent(
+            KeyboardModifierEvent.Type.MODIFIER_STATE_CHANGE,
+            new Pair<>(this, toggled)
+        ));
     }
 
     @Override
@@ -127,8 +140,13 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
         return ContextCompat.getDrawable(context, backgroundId);
     }
 
-    public boolean isToggled()
+    @Override
+    public boolean equals(@Nullable Object obj)
     {
-        return toggled;
+        if (!(obj instanceof KeyboardButton)) {
+            return false;
+        }
+
+        return ((KeyboardButton)obj).getKeyCode().equals(this.getKeyCode());
     }
 }

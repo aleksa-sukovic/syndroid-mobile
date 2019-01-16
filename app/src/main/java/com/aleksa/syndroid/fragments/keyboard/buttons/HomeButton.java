@@ -29,7 +29,7 @@ public class HomeButton extends KeyboardButton
     }
 
     @Override
-    protected String getKeyCode()
+    public String getKeyCode()
     {
         return "home";
     }

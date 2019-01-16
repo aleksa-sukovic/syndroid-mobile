@@ -19,13 +19,35 @@ public class FragmentOrchestrator
 
     public void navigateToFragment(Unit unit)
     {
+        if (isActiveFragment(unit.getTag())) {
+            Fragment fragment = getActiveFragment();
+
+            if (fragment instanceof Wakable) {
+                ((Wakable)fragment).onWakeUp();
+            }
+
+            return;
+        }
+
         navigateToFragment(FragmentFactory.initializeFromTag(unit.getTag()), unit.getTag());
     }
 
     public void navigateToFragment(Fragment fragment, String tag)
     {
         fragmentManager.beginTransaction()
-            .replace(containerId, fragment)
+            .replace(containerId, fragment, tag)
             .commit();
+    }
+
+    public boolean isActiveFragment(String tag)
+    {
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+
+        return fragment != null;
+    }
+
+    public Fragment getActiveFragment()
+    {
+        return fragmentManager.findFragmentById(containerId);
     }
 }

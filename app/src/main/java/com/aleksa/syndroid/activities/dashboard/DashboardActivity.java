@@ -3,6 +3,7 @@ package com.aleksa.syndroid.activities.dashboard;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -10,6 +11,9 @@ import android.widget.Toast;
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectListener;
 import com.aleksa.syndroid.fragments.FragmentOrchestrator;
+import com.aleksa.syndroid.fragments.keyboard.KeyboardFragment;
+import com.aleksa.syndroid.fragments.keyboard.buttons.KeyboardButton;
+import com.aleksa.syndroid.fragments.keyboard.buttons.ShiftButton;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
 import com.aleksa.syndroid.library.managers.KeyPressManager;
@@ -21,6 +25,9 @@ import com.aleksa.syndroid.objects.unit_item.models.Unit;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DashboardActivity extends BaseDashboard implements UnitSelectListener
 {
@@ -96,7 +103,18 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event)
     {
-        EventBus.getDefault().post(keyPressManager.constructRequest(keyCode, event));
+        Map<KeyboardButton, Boolean> modifiers = new HashMap<>();
+
+        if (fragmentOrchestrator.isActiveFragment("keyboard")) {
+            KeyboardFragment keyboardFragment = (KeyboardFragment) fragmentOrchestrator.getActiveFragment();
+
+            modifiers = keyboardFragment.getModifiers();
+        }
+
+        OutgoingRequest outgoingRequest = keyPressManager.constructRequest(this, keyCode, event, modifiers);
+        if (outgoingRequest != null) {
+            onOutgoingRequest(outgoingRequest);
+        }
 
         return super.onKeyUp(keyCode, event);
     }
