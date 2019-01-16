@@ -38,12 +38,7 @@ public class Application implements WebSocketListener, Bootstrappable
 
     public static Application getInstance(Context context, String ip, int port)
     {
-        if(instance == null) {
-            instance = new Application(context, ip, port);
-        } else if (!instance.ip.equals(ip)) {
-            instance.stop();
-            instance = new Application(context, ip, port);
-        }
+        instance = new Application(context, ip, port);
 
         return instance;
     }

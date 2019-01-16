@@ -52,15 +52,17 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
         super.initialize();
 
         fragmentOrchestrator = new FragmentOrchestrator(this, R.id.fragment_container);
-
-        application = Application.getInstance(this, getServer().getIp(), Application.getDefaultPort());
-
-        application.start();
     }
 
     @Override
     protected Application getSynDroidApplication()
     {
+        if (application != null) {
+            application.stop();
+        }
+
+        application = Application.getInstance(this, getServer().getIp(), Application.getDefaultPort());
+
         return application;
     }
 
