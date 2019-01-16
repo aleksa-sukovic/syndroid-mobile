@@ -6,6 +6,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.managers.KeyboardManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class ToolbarMenu
 {
@@ -33,15 +37,17 @@ public class ToolbarMenu
                 return true;
             }
             case R.id.menu_keyboard : {
-                Toast.makeText(activity, "Keyboard", Toast.LENGTH_SHORT).show();
+                KeyboardManager.showKeyboard((AppCompatActivity) listener);
                 return true;
             }
             case R.id.menu_left_click : {
-                Toast.makeText(activity, "Left Click", Toast.LENGTH_SHORT).show();
+                EventBus.getDefault().post(new OutgoingRequest.Builder()
+                    .setRoutePath("/mouse/left-click").build());
                 return true;
             }
             case R.id.menu_right_click : {
-                Toast.makeText(activity, "Right Click", Toast.LENGTH_SHORT).show();
+                EventBus.getDefault().post(new OutgoingRequest.Builder()
+                    .setRoutePath("/mouse/right-click").build());
                 return true;
             }
         }
