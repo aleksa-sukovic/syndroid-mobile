@@ -1,16 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="?attr/primary_text"
-        android:text="State Fragment"
-        android:textSize="22sp"
-        android:fontFamily="@font/roboto_thin"
-        />
     
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/instruction_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="?attr/primary_light"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        >
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_state_instruction_1"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="14sp"
+            android:text="@string/fragment_state_instruction_2"
+            android:textAlignment="center"
+            />
+        
+    </LinearLayout>
+    
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/instruction_container"
+        android:layout_centerHorizontal="true"
+        >
+    
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="?attr/triangle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            android:padding="8dp"
+            />
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+        
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="20dp"
+                >
+            
+                <com.aleksa.syndroid.fragments.state.buttons.ShutdownButton
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    app:display_value="@string/fragment_state_button_shutdown"
+                    android:layout_marginEnd="20dp"
+                    />
+            
+                <com.aleksa.syndroid.fragments.state.buttons.SleepButton
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    app:display_value="@string/fragment_state_button_sleep" />
+        
+            </LinearLayout>
+        
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                >
+            
+                <com.aleksa.syndroid.fragments.state.buttons.Reboot
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    app:display_value="@string/fragment_state_button_reboot"
+                    android:layout_marginEnd="20dp"
+                    />
+            
+                <com.aleksa.syndroid.fragments.state.buttons.LogOffButton
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    app:display_value="@string/fragment_state_button_log_off" />
+        
+            </LinearLayout>
+    
+        </LinearLayout>
+    
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="?attr/triangle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:rotation="180"
+            android:padding="8dp"
+            tools:ignore="ContentDescription" />
+        
+    </android.support.constraint.ConstraintLayout>
+    
+</RelativeLayout>

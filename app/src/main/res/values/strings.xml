@@ -46,4 +46,10 @@
     <string name="keyboard_fragment_instruction_1">Tap a button once to send key</string>
     <string name="keyboard_fragment_instruction_2">Long press to emmulate key press</string>
     <string name="keyboard_fragment_instruction_3">Key presses will be sent as modifiers along with every keyboard input</string>
+    <string name="fragment_state_instruction_1">You can control the state of your pc from here</string>
+    <string name="fragment_state_instruction_2">Note that actions taken here will disconnect you from server</string>
+    <string name="fragment_state_button_shutdown">Shutdown</string>
+    <string name="fragment_state_button_sleep">Sleep</string>
+    <string name="fragment_state_button_reboot">Reboot</string>
+    <string name="fragment_state_button_log_off">Log Off</string>
 </resources>
