@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="?attr/background"
+    >
+    
+    <!--Title-->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="?attr/primary_text"
+        />
+    
+    <!--Edit Fields-->
+    <LinearLayout
+        android:id="@+id/edit_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:orientation="vertical"
+        >
+    
+        <EditText
+            android:id="@+id/server_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"
+            android:inputType="text"
+            android:autofillHints="@string/dialog_edit_server_name_field"
+            android:hint="@string/dialog_edit_server_name_field"
+    
+            android:textColor="?attr/primary_text"
+            android:textColorHint="?attr/secondary_text"
+            android:background="@drawable/edit_text_bottom_shape"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
+            />
+    
+        <EditText
+            android:id="@+id/server_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:autofillHints="@string/dialog_edit_server_ip_field"
+            android:hint="@string/dialog_edit_server_ip_field"
+            
+            android:textColor="?attr/primary_text"
+            android:textColorHint="?attr/secondary_text"
+            android:background="@drawable/edit_text_bottom_shape"
+            android:textCursorDrawable="@drawable/edit_text_cursor" />
+        
+    </LinearLayout>
+    
+    <!--Buttons-->
+    <LinearLayout
+        android:layout_below="@id/edit_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="end"
+        >
+        
+        <!--Confirm Button-->
+        <TextView
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="?attr/accent"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/dialog_confirm_confirm_button"
+            />
+        
+        <!--Dismiss Button-->
+        <TextView
+            android:id="@+id/dismiss_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="?attr/secondary_text"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp"
+            android:text="@string/dialog_confirm_dismiss_button"
+            />
+    
+    </LinearLayout>
+
+</RelativeLayout>

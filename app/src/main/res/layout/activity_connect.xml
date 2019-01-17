@@ -1,32 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConnectActivity">
+    android:background="?attr/background_image"
+    tools:context=".activities.connect.ConnectActivity"
+    tools:layout_editor_absoluteY="25dp">
+    
+    <!--App Title-->
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:letterSpacing="0.1"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/app_name"
+        android:textAllCaps="false"
+        android:textColor="?attr/accent"
+        android:textSize="38sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+    
+    <!--App Subtitle-->
+    <TextView
+        android:id="@+id/app_claim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/app_claim"
+        android:textColor="?attr/secondary_text"
+        android:layout_below="@id/app_name"
+        android:layout_centerHorizontal="true"/>
+    
+    <!--Connect Button-->
+    <FrameLayout
+        android:id="@+id/btn_connect_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:onClick="scanQrCode"
+        android:layout_marginBottom="16dp"
+        android:layout_centerInParent="true">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/connect_activity_btn_connect_img"
+            android:src="?attr/connect_btn" />
+    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_thin"
+            android:text="@string/connect_activity_scan_btn"
+            android:textColor="?attr/secondary_text"
+            android:textSize="18sp" />
+
+    </FrameLayout>
     
     <TextView
+        android:id="@+id/favourites_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Favourites"
+        android:fontFamily="@font/roboto_thin"
+        android:layout_below="@id/btn_connect_container"
+        android:textColor="?attr/icons"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="2dp"
+        />
     
+    <ImageView
+        android:id="@+id/favourites_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/icons"
+        android:layout_below="@id/favourites_text"
+        tools:ignore="ContentDescription" />
     
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <!--Favourites-->
+    <FrameLayout
+        android:id="@+id/favourites_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/favourites_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+    
+        <fragment
+            android:id="@+id/fragment_favourites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.aleksa.syndroid.activities.connect.favourites.FavouritesFragment"
+            tools:layout="@layout/fragment_favourites"
+            />
+        
+    </FrameLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

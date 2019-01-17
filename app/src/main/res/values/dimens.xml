@@ -1,3 +1,3 @@
-<resources>
-    <dimen name="fab_margin">16dp</dimen>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="bottom_navigation_small_selected_width_difference" tools:override="true">0.1dp</dimen>
 </resources>
