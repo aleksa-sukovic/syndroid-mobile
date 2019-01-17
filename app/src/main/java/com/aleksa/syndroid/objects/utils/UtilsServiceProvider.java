@@ -12,7 +12,8 @@ public class UtilsServiceProvider implements ServiceProvider
     public List<Route> getRoutes()
     {
         return Arrays.asList(
-            new Route("/device/info", "com.aleksa.syndroid.objects.utils.controllers.UtilsController", "deviceInfo")
+            new Route("/device/info", "com.aleksa.syndroid.objects.utils.controllers.UtilsController", "deviceInfo"),
+            new Route("/device/ping", "com.aleksa.syndroid.objects.utils.controllers.UtilsController", "ping")
         );
     }
 }
