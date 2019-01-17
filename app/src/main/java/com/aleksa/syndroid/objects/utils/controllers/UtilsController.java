@@ -43,4 +43,13 @@ public class UtilsController extends BaseController
         }
     }
 
+    public String ping(Context context, IncomingRequest request)
+    {
+        Map<String, String> params = new HashMap<>();
+
+        params.put("message", "Pong");
+
+        return this.respond(request, params, 200);
+    }
+
 }
