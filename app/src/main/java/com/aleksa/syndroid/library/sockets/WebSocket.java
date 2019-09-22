@@ -1,7 +1,5 @@
 package com.aleksa.syndroid.library.sockets;
 
-import android.util.Log;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -76,6 +74,5 @@ public class WebSocket extends okhttp3.WebSocketListener
     {
         client = null;
         listener.onFailure();
-        Log.d(TAG, "onFailure: " + response);
     }
 }

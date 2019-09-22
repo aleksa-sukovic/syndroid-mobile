@@ -16,11 +16,11 @@ import com.aleksa.syndroid.objects.server.models.Server;
 
 public class AppDrawer implements DrawerLayout.DrawerListener
 {
+    private Server server;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
     private AppCompatActivity activity;
-    private DrawerLayout      drawerLayout;
-    private NavigationView    navigationView;
-    private Toolbar           toolbar;
-    private Server            server;
+    private NavigationView navigationView;
 
     private boolean isDrawerOpen;
 

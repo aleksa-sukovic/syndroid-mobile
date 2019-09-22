@@ -6,7 +6,7 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 import com.aleksa.syndroid.library.controllers.BaseController;
-import com.aleksa.syndroid.library.router.request.IncomingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.objects.battery.validators.BatteryValidator;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class BatteryController extends BaseController
         validator = new BatteryValidator();
     }
 
-    public String batteryPercentage(Context context, IncomingRequest request)
+    public String batteryPercentage(Context context, Request request)
     {
         int batteryLevel = getBatteryPercentage(context);
 

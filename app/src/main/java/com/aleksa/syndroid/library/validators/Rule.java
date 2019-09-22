@@ -13,7 +13,7 @@ public class Rule
     public Rule(String name, String handlers, String pattern, boolean required)
     {
         this.name = name;
-        this.pattern = pattern;
+        this.pattern = "^" + pattern + "$";
         this.required = required;
 
         this.handlers = handlers.split("\\|");
@@ -55,6 +55,7 @@ public class Rule
     public String toString()
     {
         String handler = "";
+
         for (String h : handlers) {
             handler += h + ":";
         }

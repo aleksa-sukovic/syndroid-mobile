@@ -1,7 +1,6 @@
 package com.aleksa.syndroid.activities.connect.favourites.interfaces;
 
 import android.support.v7.widget.RecyclerView;
-
 import com.aleksa.syndroid.objects.server.models.Server;
 
 public interface OnFavouritesActionListener

@@ -1,63 +1,48 @@
 package com.aleksa.syndroid.library.router;
-
+import androidx.annotation.NonNull;
 import com.aleksa.syndroid.library.controllers.BaseController;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Route
 {
-    private String regExPath;
     private String controllerName;
     private String handlerName;
     private String path;
+    private Map<String, String> params;
 
     public Route()
     {
         path = "";
         controllerName = "";
         handlerName = "";
-        regExPath = "";
+        this.params = new HashMap<>();
     }
 
     public Route(String path)
     {
-        this.path = path;
+        this.path = path.split("\\?")[0];
         this.controllerName = "";
         this.handlerName = "";
-        regExPath = "";
-
-        this.constructRegExPath(path);
+        this.params = RouteParser.parseParams(path);
     }
 
     public Route(String path, String controllerName, String handlerName)
     {
-        this.path = path;
+        this.path = path.split("\\?")[0];
         this.controllerName = controllerName;
         this.handlerName = handlerName;
-        this.regExPath = "";
-
-        this.constructRegExPath(path);
+        this.params = RouteParser.parseParams(path);
     }
 
-    private void constructRegExPath(String path)
+    public boolean match(Route route)
     {
-        path = path.split("\\?")[0];
-        makeRegExPath(path);
-        this.regExPath = "^" + this.regExPath + "$";
+        return this.path.equals(route.path);
     }
 
-    private void makeRegExPath(String path)
+    public void addParam(String key, String value)
     {
-        int openParamBracket = path.indexOf('{');
-        int closeParamBracket = path.indexOf('}');
-
-        if (openParamBracket == -1 || closeParamBracket == -1) {
-            this.regExPath += path;
-            return;
-        }
-
-        this.regExPath = path.substring(0, openParamBracket);
-        this.regExPath += "[a-zA-Z0-9_]+";
-
-        makeRegExPath(path.substring(closeParamBracket + 1));
+        this.params.put(key, value);
     }
 
     public BaseController getController()
@@ -68,21 +53,11 @@ public class Route
             clazz = Class.forName(controllerName);
             Object controller = clazz.newInstance();
             return (BaseController) controller;
-        } catch(IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
         return null;
-    }
-
-    public boolean isExceptionRoute()
-    {
-        return getBasePath().matches("^/exception");
-    }
-
-    public String getRegExPath()
-    {
-        return regExPath;
     }
 
     public String getPath()
@@ -90,13 +65,28 @@ public class Route
         return path;
     }
 
-    public String getBasePath()
-    {
-        return path.split("\\?")[0];
-    }
-
     public String getHandler()
     {
         return handlerName;
+    }
+
+    public String getControllerName()
+    {
+        return this.controllerName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String params = "";
+        for (Map.Entry<String, String> entry: this.params.entrySet()) {
+            params += entry.getKey() + "=" + entry.getValue() + "&";
+        }
+
+        if (params.length() == 0) {
+            return this.path;
+        } else {
+            return this.path + "?" + params.substring(0, params.length() - 1);
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.aleksa.syndroid.objects.utils.controllers;
 import android.content.Context;
 
 import com.aleksa.syndroid.library.controllers.BaseController;
-import com.aleksa.syndroid.library.router.request.IncomingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.objects.utils.validators.UtilsValidator;
 import com.jaredrummler.android.device.DeviceName;
 
@@ -16,7 +16,7 @@ public class UtilsController extends BaseController
         validator = new UtilsValidator();
     }
 
-    public String deviceInfo(Context context, IncomingRequest request)
+    public String deviceInfo(Context context, Request request)
     {
         Map<String, String> params = new HashMap<>();
 
@@ -43,7 +43,7 @@ public class UtilsController extends BaseController
         }
     }
 
-    public String ping(Context context, IncomingRequest request)
+    public String ping(Context context, Request request)
     {
         Map<String, String> params = new HashMap<>();
 

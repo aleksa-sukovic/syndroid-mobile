@@ -7,12 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.fragments.mouse.mouse_pad.MousePad;
 import com.aleksa.syndroid.fragments.mouse.mouse_pad.MousePadListener;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.events.Event;
+import com.aleksa.syndroid.library.router.request.Request;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,47 +47,63 @@ public class MouseFragment extends Fragment implements MousePadListener
     @Override
     public void onMove(float xOffset, float yOffset)
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/move")
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/move")
             .addParam("x", Float.toString(xOffset))
             .addParam("y", Float.toString(yOffset))
-            .setExpectsResponse(false)
+            .setType("request")
+            .expectResponse(false)
+            .autoincrement()
             .build());
     }
 
     @Override
     public void onDragStart()
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/drag/start").build());
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/drag/start")
+            .setType("request")
+            .autoincrement()
+            .build());
     }
 
     @Override
     public void onDragEnd()
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/drag/end").build());
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/drag/end")
+            .setType("request")
+            .autoincrement()
+            .build());
     }
 
     @Override
     public void onLeftClick()
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/left-click").build());
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/left-click")
+            .setType("request")
+            .autoincrement()
+            .build());
     }
 
     @Override
     public void onRightClick()
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/right-click").build());
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/right-click")
+            .setType("request")
+            .autoincrement()
+            .build());
     }
 
     @Override
     public void onScroll(float yOffset)
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/scroll")
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/scroll")
+            .setType("request")
+            .autoincrement()
             .addParam("amount", Float.toString(yOffset))
             .build());
     }
@@ -95,8 +111,10 @@ public class MouseFragment extends Fragment implements MousePadListener
     @Override
     public void onDoubleTap()
     {
-        EventBus.getDefault().post(new OutgoingRequest.Builder()
-            .setRoutePath("/mouse/double-left-click")
+        EventBus.getDefault().post(new Request.Builder()
+            .setRouteByPath("/mouse/double-left-click")
+            .setType("request")
+            .autoincrement()
             .build());
     }
 }

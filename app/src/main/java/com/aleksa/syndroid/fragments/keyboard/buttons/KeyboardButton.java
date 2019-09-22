@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.library.events.KeyboardModifierEvent;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.managers.ThemeManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -119,10 +119,12 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
     public void onClick(View v)
     {
         EventBus.getDefault().post(
-            new OutgoingRequest.Builder()
-                .setRoutePath("/keyboard/type")
+            new Request.Builder()
+                .setRouteByPath("/keyboard/type")
                 .addParam("key", getKeyCode())
                 .addParam("modifierInput", "true")
+                .autoincrement()
+                .setType("request")
                 .build()
         );
     }

@@ -5,7 +5,7 @@ public class Event<EventType, EventData>
     private EventType eventType;
     private EventData data;
 
-    public Event(EventType eventType, EventData data)
+    Event(EventType eventType, EventData data)
     {
         this.eventType = eventType;
         this.data   = data;

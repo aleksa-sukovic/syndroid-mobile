@@ -3,10 +3,9 @@ package com.aleksa.syndroid.activities.dashboard.navigation.menu;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.aleksa.syndroid.R;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.managers.KeyboardManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,13 +40,13 @@ public class ToolbarMenu
                 return true;
             }
             case R.id.menu_left_click : {
-                EventBus.getDefault().post(new OutgoingRequest.Builder()
-                    .setRoutePath("/mouse/left-click").build());
+                EventBus.getDefault().post(new Request.Builder()
+                    .setRouteByPath("/mouse/left-click").build());
                 return true;
             }
             case R.id.menu_right_click : {
-                EventBus.getDefault().post(new OutgoingRequest.Builder()
-                    .setRoutePath("/mouse/right-click").build());
+                EventBus.getDefault().post(new Request.Builder()
+                    .setRouteByPath("/mouse/right-click").build());
                 return true;
             }
         }

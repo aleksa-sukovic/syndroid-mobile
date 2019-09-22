@@ -13,22 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.OnFavouritesActionListener;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.daimajia.swipe.SwipeLayout;
-
 import java.util.Collections;
 import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
-
-    private List<Server>               serverList;
+    private List<Server> serverList;
     private OnFavouritesActionListener actionListener;
 
-    public FavouritesAdapter(List<Server> servers, OnFavouritesActionListener actionListener) {
+    public FavouritesAdapter(List<Server> servers, OnFavouritesActionListener actionListener)
+    {
         this.serverList     = servers;
         this.actionListener = actionListener;
     }
@@ -37,7 +35,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        Context context         = parent.getContext();
+        Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         return new ViewHolder(inflater.inflate(R.layout.fragment_favourites_item, parent, false));
@@ -110,10 +108,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
         this.notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements SwipeLayout.SwipeListener{
-
-        TextView serverName;
+    class ViewHolder extends RecyclerView.ViewHolder implements SwipeLayout.SwipeListener
+    {
         TextView serverIp;
+        TextView serverName;
         ImageView reorderHandle;
         SwipeLayout swipeLayout;
         ConstraintLayout frontView;

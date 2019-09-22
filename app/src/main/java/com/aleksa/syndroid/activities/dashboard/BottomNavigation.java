@@ -53,7 +53,7 @@ class BottomNavigation implements AHBottomNavigation.OnTabSelectedListener
 
                 bottomNavigation.refresh();
                 bottomNavigation.setCurrentItem(0);
-                listener.onUnitSelect(unitList.get(0));
+                listener.handleUnitSelect(unitList.get(0));
             });
         });
     }
@@ -81,7 +81,7 @@ class BottomNavigation implements AHBottomNavigation.OnTabSelectedListener
     @Override
     public boolean onTabSelected(int position, boolean wasSelected)
     {
-        listener.onUnitSelect(unitList.get(position));
+        listener.handleUnitSelect(unitList.get(position));
 
         return true;
     }

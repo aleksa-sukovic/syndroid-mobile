@@ -4,10 +4,6 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.aleksa.syndroid.library.events.ApplicationEvent;
-
-import org.greenrobot.eventbus.EventBus;
-
 public class ThemeManager
 {
     private static String NIGHT_MODE = "dark_mode_shared_preferences";

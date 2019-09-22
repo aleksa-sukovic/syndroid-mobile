@@ -11,7 +11,8 @@ import com.aleksa.syndroid.fragments.state.StateFragment;
 
 public class FragmentFactory
 {
-    public static Fragment initializeFromTag(String tag) {
+    public static Fragment initializeFromTag(String tag)
+    {
         switch(tag) {
             case "mouse": return new MouseFragment();
             case "media" : return new MediaFragment();
