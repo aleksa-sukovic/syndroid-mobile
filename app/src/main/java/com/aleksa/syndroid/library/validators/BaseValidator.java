@@ -89,7 +89,7 @@ public class BaseValidator
     {
         ArrayList list = new ArrayList<>();
 
-        list.add(new Rule("request_id", "*", "[0-9]+", true));
+        list.add(new Rule("id", "*", "[0-9]+", true));
 
         return list;
     }

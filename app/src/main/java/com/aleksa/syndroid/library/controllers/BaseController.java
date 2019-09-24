@@ -44,11 +44,14 @@ abstract public class BaseController
     protected String respond(Request request, Map<String, String> data, int statusCode)
     {
         return new Request.Builder()
+            .setRouteByPath("/response")
             .addParam("id", Long.toString(request.getID()))
-            .addParam("type", "response")
+            .setType("response")
+            .addParam("request_id", Long.toString(request.getID()))
             .addParam("status_code", Integer.toString(statusCode))
             .addParam("data", new JSONObject(data).toString())
             .build()
             .toString();
     }
+
 }

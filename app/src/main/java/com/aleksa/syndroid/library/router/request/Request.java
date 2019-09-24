@@ -11,12 +11,10 @@ public class Request
 {
     private Route route;
     private boolean expectsResponse;
-    private Map<String, String> params;
     private Router.ResponseCallback responseCallback;
 
     public Request(Route route)
     {
-        this.params = new HashMap<>();
         this.route = route;
         this.expectsResponse = this.has("expectsResponse") && this.input("expectsResponse").equals("yes");
     }
@@ -60,12 +58,12 @@ public class Request
 
     public boolean has(String param)
     {
-        return this.params.containsKey(param);
+        return this.route.getParams().containsKey(param);
     }
 
     public String input(String param)
     {
-        return this.params.get(param);
+        return this.route.getParams().get(param);
     }
 
     public void addParam(String key, String value)
@@ -80,7 +78,7 @@ public class Request
 
     public Map<String, String> getParams()
     {
-        return params;
+        return route.getParams();
     }
 
     public Router.ResponseCallback getResponseCallback()

@@ -45,6 +45,11 @@ public class Route
         this.params.put(key, value);
     }
 
+    public Map<String, String> getParams()
+    {
+        return this.params;
+    }
+
     public BaseController getController()
     {
         Class<?> clazz;
