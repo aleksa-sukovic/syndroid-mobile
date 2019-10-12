@@ -28,7 +28,7 @@ public class UtilsController extends BaseController
                 params.put("codename", info.codename);
                 params.put("deviceName", info.getName());
 
-                synchronized(request) {
+                synchronized (request) {
                     request.notify();
                 }
             });
@@ -37,7 +37,7 @@ public class UtilsController extends BaseController
                 request.wait();
 
                 return this.respond(request, params, 200);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 return this.respond(request, params, 500);
             }
         }
