@@ -43,15 +43,18 @@ abstract public class BaseController
 
     protected String respond(Request request, Map<String, String> data, int statusCode)
     {
-        return new Request.Builder()
+        Request.Builder builder = new Request.Builder()
             .setRouteByPath("/response")
             .addParam("id", Long.toString(request.getID()))
             .setType("response")
             .addParam("request_id", Long.toString(request.getID()))
-            .addParam("status_code", Integer.toString(statusCode))
-            .addParam("data", new JSONObject(data).toString())
-            .build()
-            .toString();
+            .addParam("status_code", Integer.toString(statusCode));
+
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            builder.addParam(entry.getKey(), entry.getValue());
+        }
+
+        return builder.build().toString();
     }
 
 }
