@@ -64,8 +64,6 @@ public abstract class SynDroidDatabase extends RoomDatabase
             unitDao.insert(new Unit( "media", "Media", 1, "Control PC media.", R.drawable.ic_media));
             unitDao.insert(new Unit("state", "State", 2, "Change PC state.", R.drawable.ic_power_settings));
             unitDao.insert(new Unit("keyboard", "Keyboard", 3, "Use your PC keyboard.", R.drawable.ic_keyboard_navigation));
-            unitDao.insert(new Unit("files", "Files", 4, "Transfer files between PC and phone.", R.drawable.ic_files));
-            unitDao.insert(new Unit("notifications", "Notifications", 5, "Manage syncing of notifications.", R.drawable.ic_notifications));
 
             return null;
         }
