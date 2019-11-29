@@ -3,6 +3,7 @@
     <string name="app_claim">synchronize everything</string>
     <string name="connect_activity_btn_connect_img">Scan and connect button</string>
     <string name="connect_activity_scan_btn">Scan and connect</string>
+    <string name="connect_activity_manual_btn">Add manually</string>
     <string name="favourites_fragment_placeholder_text">No servers added</string>
     <string name="favourites_fragment_edit_dialog_title">Edit </string>
     <string name="dialog_confirm_ok_button">Ok</string>

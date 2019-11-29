@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.aleksa.syndroid.R;
 import com.aleksa.syndroid.library.permissions.PermissionManager;
@@ -18,9 +19,9 @@ import androidx.annotation.NonNull;
 
 public class ScannerActivity extends AppCompatActivity implements DecodeCallback
 {
+    public static final int RESULT_ADD_MANUAL = 543634;
 
     private CodeScanner codeScanner;
-
     private PermissionManager permissionManager;
     private int cameraPermissionRequestCode;
 
@@ -88,6 +89,15 @@ public class ScannerActivity extends AppCompatActivity implements DecodeCallback
         data.setData(Uri.parse(result.toString()));
 
         setResult(RESULT_OK, data);
+        finish();
+    }
+
+    public void onAddManuallyClick(View view)
+    {
+        Intent data = new Intent();
+
+        setResult(ScannerActivity.RESULT_ADD_MANUAL, data);
+
         finish();
     }
 }

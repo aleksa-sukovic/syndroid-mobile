@@ -48,11 +48,23 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
-        if (requestCode != SCAN_QR_REQUEST_CODE || resultCode != RESULT_OK) {
+        if (requestCode != SCAN_QR_REQUEST_CODE) {
             return;
         }
 
-        if (data == null || data.getData() == null) {
+        if (resultCode == ScannerActivity.RESULT_ADD_MANUAL) {
+            ServerRepository repository = new ServerRepository(getApplication());
+
+            repository.insert(new Server("192.168.1.1", "New Server"))
+                .then(result -> {
+                    finish();
+                    startActivity(getIntent());
+                });
+
+            return;
+        }
+
+        if (resultCode != RESULT_OK || data == null || data.getData() == null) {
             return;
         }
 
