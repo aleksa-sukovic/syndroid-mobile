@@ -4,7 +4,6 @@ import com.aleksa.syndroid.objects.unit_item.models.Unit;
 
 public interface UnitSelectListener
 {
-    void onUnitSelect(Unit unit);
-
-    void onUnitOrderChange(Unit one, Unit two);
+    void handleUnitSelect(Unit unit);
+    void handleUnitOrderChange(Unit one, Unit two);
 }

@@ -23,7 +23,7 @@ public class FragmentOrchestrator
             Fragment fragment = getActiveFragment();
 
             if (fragment instanceof Wakable) {
-                ((Wakable)fragment).onWakeUp();
+                ((Wakable)fragment).handleWakeUp();
             }
 
             return;

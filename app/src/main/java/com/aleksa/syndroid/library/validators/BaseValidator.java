@@ -1,8 +1,9 @@
 package com.aleksa.syndroid.library.validators;
 
 import com.aleksa.syndroid.library.router.request.Request;
-import com.aleksa.syndroid.library.validators.exceptions.ValidationException;
+import com.aleksa.syndroid.library.exceptions.ValidationException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,20 +25,14 @@ public class BaseValidator
         Map<String, Map<String, String>> errors = new HashMap<>();
 
         beforeValidation(rules);
-
         validateRequired(params, rules, errors);
         validatePattern(params, rules, errors);
-
         afterValidation(errors, request);
     }
 
     private void beforeValidation(List<Rule> availableRules)
     {
-        availableRules.add(new Rule("request_id", "*", "[0-9]+", true));
-
-        for (Rule rule : availableRules) {
-            rule.setPattern("^" + rule.getPattern() + "$");
-        }
+        availableRules.addAll(this.getDefaultRules());
     }
 
     private void afterValidation(Map<String, Map<String,String>> errors, Request request) throws ValidationException
@@ -88,6 +83,15 @@ public class BaseValidator
         paramError.put(errorName, message);
 
         errors.put(paramName, paramError);
+    }
+
+    protected List<Rule> getDefaultRules()
+    {
+        ArrayList list = new ArrayList<>();
+
+        list.add(new Rule("id", "*", "[0-9]+", true));
+
+        return list;
     }
 
     private List<Rule> filterRules(Request request)

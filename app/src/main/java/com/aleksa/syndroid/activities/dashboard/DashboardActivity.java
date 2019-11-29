@@ -1,79 +1,116 @@
 package com.aleksa.syndroid.activities.dashboard;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.aleksa.syndroid.R;
+import com.aleksa.syndroid.activities.connect.ConnectActivity;
+import com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.AppDrawer;
 import com.aleksa.syndroid.activities.dashboard.navigation.listeners.UnitSelectListener;
+import com.aleksa.syndroid.activities.dashboard.navigation.menu.ToolbarMenu;
 import com.aleksa.syndroid.fragments.FragmentOrchestrator;
 import com.aleksa.syndroid.fragments.keyboard.KeyboardFragment;
 import com.aleksa.syndroid.fragments.keyboard.buttons.KeyboardButton;
-import com.aleksa.syndroid.fragments.keyboard.buttons.ShiftButton;
 import com.aleksa.syndroid.library.application.Application;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
 import com.aleksa.syndroid.library.managers.KeyPressManager;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.unit_item.models.Unit;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class DashboardActivity extends BaseDashboard implements UnitSelectListener
+public class DashboardActivity extends AppCompatActivity implements UnitSelectListener, ToolbarMenu.ToolbarMenuListener
 {
-
+    private Server server;
+    protected AppDrawer appDrawer;
+    private Application application;
+    protected ToolbarMenu toolbarMenu;
+    private KeyPressManager keyPressManager;
+    protected BottomNavigation bottomNavigation;
     private FragmentOrchestrator fragmentOrchestrator;
-    private Application          application;
-    private Server               server;
-    private KeyPressManager      keyPressManager;
 
     @Override
-    protected void beforeInitialization()
+    protected void onCreate(@Nullable Bundle savedInstanceState)
     {
-        super.beforeInitialization();
+        if (ThemeManager.isLightModeOn(this)) {
+            setTheme(R.style.DashboardActivityLight);
+        }
 
-        server = getIntent().getParcelableExtra("server");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dashboard);
+
         keyPressManager = new KeyPressManager();
-    }
-
-    @Override
-    protected void initialize()
-    {
-        super.initialize();
-
+        server = getIntent().getParcelableExtra("server");
+        appDrawer = new AppDrawer(this, server);
+        bottomNavigation = new BottomNavigation(this);
+        toolbarMenu = new ToolbarMenu(this, R.menu.dashboard_toolbar_menu);
         fragmentOrchestrator = new FragmentOrchestrator(this, R.id.fragment_container);
     }
 
     @Override
-    protected Application getSynDroidApplication()
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        if (application != null) {
-            application.stop();
-        }
-
-        application = Application.getInstance(this, getServer().getIp(), Application.getDefaultPort());
-
-        return application;
+        toolbarMenu.inflateMenu(menu);
+        return true;
     }
 
     @Override
-    protected Server getServer()
+    public boolean onOptionsItemSelected(MenuItem item)
     {
-        return server;
+        return toolbarMenu.handleOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        stopApp();
+
+        Intent intent = new Intent(this, ConnectActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        EventBus.getDefault().register(this);
+        startApp();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        stopApp();
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        stopApp();
+        super.onPause();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onServerStateChange(ApplicationEvent event)
+    public void handleServerStateChange(ApplicationEvent event)
     {
         if (event.getEventType() == ApplicationEvent.EventCode.SERVER_CONNECT) {
             Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
@@ -85,19 +122,19 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
     }
 
     @Subscribe(threadMode = ThreadMode.ASYNC)
-    public void onOutgoingRequest(OutgoingRequest request)
+    public void sendRequest(Request request)
     {
-        application.send(request);
+        application.send(request, request.getResponseCallback());
     }
 
     @Override
-    public void onUnitSelect(Unit unit)
+    public void handleUnitSelect(Unit unit)
     {
         fragmentOrchestrator.navigateToFragment(unit);
     }
 
     @Override
-    public void onUnitOrderChange(Unit one, Unit two)
+    public void handleUnitOrderChange(Unit one, Unit two)
     {
         new Handler(Looper.getMainLooper()).post(() -> bottomNavigation.refreshItems());
     }
@@ -113,16 +150,49 @@ public class DashboardActivity extends BaseDashboard implements UnitSelectListen
             modifiers = keyboardFragment.getModifiers();
         }
 
-        OutgoingRequest outgoingRequest = keyPressManager.constructRequest(this, keyCode, event, modifiers);
-        if (outgoingRequest != null) {
-            onOutgoingRequest(outgoingRequest);
+        Request request = keyPressManager.constructRequest(this, keyCode, event, modifiers);
+        if (request != null) {
+            sendRequest(request);
         }
 
         return super.onKeyUp(keyCode, event);
     }
 
+    @Override
+    public void onAppDrawerToggle()
+    {
+        appDrawer.toggleDrawer();
+    }
+
     public void switchTheme(View view)
     {
-        ThemeManager.toggleNightMode(this);
+        ThemeManager.toggleTheme(this);
+    }
+
+    protected void startApp()
+    {
+        Application application = getApp();
+
+        if (application != null) {
+            application.start();
+        }
+    }
+
+    protected void stopApp()
+    {
+        Application application = getApp();
+
+        if (application != null) {
+            application.stop();
+        }
+    }
+
+    protected Application getApp()
+    {
+        if (application != null) {
+            application.stop();
+        }
+
+        return (application = Application.getInstance(this, server.getIp(), Application.PORT));
     }
 }

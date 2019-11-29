@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Light colors-->
-    <color name="tlight_primary">#2196F3</color>
-    <color name="tlight_primary_dark">#1976D2</color>
-    <color name="tlight_primary_light">#BBDEFB</color>
-    <color name="tlight_accent">#48C6FF</color>
-    <color name="tlight_primary_text">#212121</color>
-    <color name="tlight_secondary_text">#757575</color>
+    <color name="tlight_primary">#6F93A6</color>
+    <color name="tlight_primary_dark">#96B6C5</color>
+    <color name="tlight_primary_light">#B7C9D0</color>
+    <color name="tlight_accent">#EEE0C9</color>
+    <color name="tlight_primary_text">#FFFFFF</color>
+    <color name="tlight_secondary_text">#FFFFFF</color>
     <color name="tlight_icons">#FFFFFF</color>
-    <color name="tlight_divider">#BDBDBD</color>
-    <color name="tlight_background">#FFFFFF</color>
+    <color name="tlight_divider">#E4DECB</color>
+    <color name="tlight_background">#F1F0E8</color>
     
     <!--Dark colors-->
-    <color name="tdark_primary">#5C6569</color>
-    <color name="tdark_primary_dark">#3B4245</color>
-    <color name="tdark_primary_light">#A0B2BA</color>
-    <color name="tdark_accent">#1A3947</color>
+    <color name="tdark_primary">#223C5B</color>
+    <color name="tdark_primary_dark">#091C32</color>
+    <color name="tdark_primary_light">#4A6488</color>
+    <color name="tdark_accent">#52596E</color>
     <color name="tdark_primary_text">#FFFFFF</color>
-    <color name="tdark_secondary_text">#DEDEDE</color>
+    <color name="tdark_secondary_text">#FFFFFF</color>
     <color name="tdark_icons">#FFFFFF</color>
-    <color name="tdark_divider">#CDCDCD</color>
-    <color name="tdark_background">#8E989D</color>
+    <color name="tdark_divider">#E2E2E2</color>
+    <color name="tdark_background">#4A6488</color>
     
     <!--Common colors-->
-    <color name="success">#24BB21</color>
-    <color name="warning">#FFD912</color>
-    <color name="danger">#D91010</color>
+    <color name="success">#68D066</color>
+    <color name="warning">#E5D476</color>
+    <color name="danger">#E24343</color>
 </resources>

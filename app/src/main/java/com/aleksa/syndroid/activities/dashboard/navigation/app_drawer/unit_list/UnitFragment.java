@@ -2,14 +2,11 @@ package com.aleksa.syndroid.activities.dashboard.navigation.app_drawer.unit_list
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +24,10 @@ import java.util.List;
 
 public class UnitFragment extends Fragment implements UnitActionListener
 {
-
-    private ItemTouchHelper itemTouchHelper;
-    private UnitListAdapter unitListAdapter;
-    private RecyclerView    recyclerView;
-    private UnitSelectListener    listener;
+    private RecyclerView recyclerView;
+    private UnitSelectListener listener;
     private UnitRepository unitRepository;
+    private UnitListAdapter unitListAdapter;
 
     public UnitFragment()
     {
@@ -46,8 +41,7 @@ public class UnitFragment extends Fragment implements UnitActionListener
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View layout = inflater.inflate(R.layout.unit_app_drawer_list_fragment, container, false);
         recyclerView = layout.findViewById(R.id.recycler_view);
@@ -59,7 +53,7 @@ public class UnitFragment extends Fragment implements UnitActionListener
 
         // Setting up touch listener
         ItemTouchHelper.Callback callback = new UnitSwipeTouchCallback(unitListAdapter);
-        itemTouchHelper = new ItemTouchHelper(callback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         // server repository initialization
@@ -106,16 +100,14 @@ public class UnitFragment extends Fragment implements UnitActionListener
     }
 
     @Override
-    public void onOrderChange(Unit one, Unit two)
+    public void handleOrderChange(Unit one, Unit two)
     {
-        unitRepository.updateAll(one, two).then(response -> {
-            listener.onUnitOrderChange(one, two);
-        });
+        unitRepository.updateAll(one, two).then(response -> listener.handleUnitOrderChange(one, two));
     }
 
     @Override
-    public void onUnitSelect(Unit unit)
+    public void handleUnitSelect(Unit unit)
     {
-        listener.onUnitSelect(unit);
+        listener.handleUnitSelect(unit);
     }
 }

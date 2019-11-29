@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.aleksa.syndroid.library.controllers.BaseController;
-import com.aleksa.syndroid.library.router.request.IncomingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.objects.file.validators.FileValidator;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class FileController extends BaseController
         validator = new FileValidator();
     }
 
-    public String list(Context context, IncomingRequest request)
+    public String list(Context context, Request request)
     {
         Log.d("Application", "BatteryController -> list method");
 
@@ -28,7 +28,7 @@ public class FileController extends BaseController
         return this.respond(request, params, 200);
     }
 
-    public String show(IncomingRequest request)
+    public String show(Request request)
     {
         Log.d("Application", "BatteryController -> show method");
 

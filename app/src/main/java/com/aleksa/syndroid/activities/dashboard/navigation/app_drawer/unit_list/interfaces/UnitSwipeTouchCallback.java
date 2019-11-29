@@ -10,7 +10,8 @@ public class UnitSwipeTouchCallback extends ItemTouchHelper.Callback
 {
     private final ItemTouchHelperAdapter adapter;
 
-    public UnitSwipeTouchCallback(ItemTouchHelperAdapter adapter) {
+    public UnitSwipeTouchCallback(ItemTouchHelperAdapter adapter)
+    {
         this.adapter = adapter;
     }
 

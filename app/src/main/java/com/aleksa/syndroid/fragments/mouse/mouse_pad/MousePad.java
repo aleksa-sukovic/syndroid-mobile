@@ -4,16 +4,15 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.aleksa.syndroid.fragments.mouse.gesture_manager.GestureListener;
 import com.aleksa.syndroid.fragments.mouse.gesture_manager.GestureManager;
 
 public class MousePad extends android.support.v7.widget.AppCompatTextView implements GestureListener, View.OnTouchListener
 {
-    private GestureManager       gestureManager;
-    private MousePadListener     listener;
-    private boolean              clickNdrag;
-    private int                  naturalScrolling;
+    private boolean clickNdrag;
+    private int naturalScrolling;
+    private MousePadListener listener;
+    private GestureManager gestureManager;
 
     public MousePad(Context context)
     {

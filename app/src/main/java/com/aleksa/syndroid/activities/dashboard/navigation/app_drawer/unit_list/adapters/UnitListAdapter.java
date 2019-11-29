@@ -23,11 +23,12 @@ import java.util.List;
 
 public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHolder> implements ItemTouchHelperAdapter
 {
-    private List<Unit>         unitList;
+    private List<Unit> unitList;
     private UnitActionListener actionListener;
 
-    public UnitListAdapter(List<Unit> units, UnitActionListener actionListener) {
-        this.unitList     = units;
+    public UnitListAdapter(List<Unit> units, UnitActionListener actionListener)
+    {
+        this.unitList = units;
         this.actionListener = actionListener;
     }
 
@@ -35,7 +36,7 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
     @Override
     public UnitListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        Context context         = parent.getContext();
+        Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         return new UnitListAdapter.ViewHolder(inflater.inflate(R.layout.unit_app_drawer_list_item, parent, false));
@@ -50,7 +51,7 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
         viewHolder.name.setText(unit.getTitle());
         viewHolder.description.setText(unit.getDescription());
         viewHolder.icon.setImageResource(unit.getDrawable());
-        viewHolder.rootLayout.setOnClickListener(v -> actionListener.onUnitSelect(unit));
+        viewHolder.rootLayout.setOnClickListener(v -> actionListener.handleUnitSelect(unit));
     }
 
     @Override
@@ -67,7 +68,7 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
 
         first.setPosition(toPosition);
         second.setPosition(fromPosition);
-        actionListener.onOrderChange(first, second);
+        actionListener.handleOrderChange(first, second);
 
         Collections.swap(unitList, fromPosition, toPosition);
 
@@ -89,20 +90,8 @@ public class UnitListAdapter extends RecyclerView.Adapter<UnitListAdapter.ViewHo
         new Handler(Looper.getMainLooper()).post(this::notifyDataSetChanged);
     }
 
-    public List<Unit> getServerList()
+    class ViewHolder extends RecyclerView.ViewHolder
     {
-        return this.unitList;
-    }
-
-    public void removeServer(Unit unit)
-    {
-        this.unitList.remove(unit);
-
-        this.notifyDataSetChanged();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView name;
         TextView description;
         RelativeLayout rootLayout;

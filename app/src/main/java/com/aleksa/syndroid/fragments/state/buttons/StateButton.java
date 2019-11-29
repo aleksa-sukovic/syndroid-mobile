@@ -5,25 +5,19 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.aleksa.syndroid.R;
-import com.aleksa.syndroid.library.events.KeyboardModifierEvent;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.managers.ThemeManager;
-
 import org.greenrobot.eventbus.EventBus;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public abstract class StateButton extends FrameLayout implements View.OnClickListener
 {
-
     private TextView textView;
 
     {
@@ -100,8 +94,10 @@ public abstract class StateButton extends FrameLayout implements View.OnClickLis
     protected void sendStateCommand(String stateTag)
     {
         EventBus.getDefault().post(
-            new OutgoingRequest.Builder()
-                .setRoutePath("/state/change/" + stateTag)
+            new Request.Builder()
+                .setRouteByPath("/state/change/" + stateTag)
+                .setType("request")
+                .autoincrement()
                 .build()
         );
     }
@@ -110,10 +106,10 @@ public abstract class StateButton extends FrameLayout implements View.OnClickLis
     {
         int backgroundId;
 
-        if (ThemeManager.isNightModeOn(context)) {
-            backgroundId = R.drawable.ic_state_button_dark;
-        } else {
+        if (ThemeManager.isLightModeOn(context)) {
             backgroundId = R.drawable.ic_state_button_light;
+        } else {
+            backgroundId = R.drawable.ic_state_button_dark;
         }
 
         return ContextCompat.getDrawable(context, backgroundId);

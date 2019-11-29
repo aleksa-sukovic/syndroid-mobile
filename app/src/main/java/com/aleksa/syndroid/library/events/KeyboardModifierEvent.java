@@ -6,7 +6,6 @@ import com.aleksa.syndroid.fragments.keyboard.buttons.KeyboardButton;
 
 public class KeyboardModifierEvent extends Event<KeyboardModifierEvent.Type, Pair<KeyboardButton, Boolean>>
 {
-
     public KeyboardModifierEvent(Type keyboardModifierType, Pair<KeyboardButton, Boolean> keyboardButtonBooleanPair)
     {
         super(keyboardModifierType, keyboardButtonBooleanPair);
