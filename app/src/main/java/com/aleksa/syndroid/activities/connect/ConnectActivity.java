@@ -20,8 +20,8 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (ThemeManager.isNightModeOn(this)) {
-            setTheme(R.style.ConnectActivityDark);
+        if (ThemeManager.isLightModeOn(this)) {
+            setTheme(R.style.ConnectActivityLight);
         }
 
         super.onCreate(savedInstanceState);

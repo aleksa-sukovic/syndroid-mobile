@@ -17,7 +17,7 @@
             android:name=".activities.connect.ConnectActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/ConnectActivityLight">
+            android:theme="@style/ConnectActivityDark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
     
@@ -33,14 +33,14 @@
         <activity
             android:name=".activities.scanner.ScannerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ScannerActivityLight" />
+            android:theme="@style/ScannerActivityDark" />
         
         <!--Dashboard Activity-->
         <activity
             android:name=".activities.dashboard.DashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/DashboardActivityLight"
+            android:theme="@style/DashboardActivityDark"
             />
     </application>
 </manifest>

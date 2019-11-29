@@ -28,8 +28,8 @@ public class ScannerActivity extends AppCompatActivity implements DecodeCallback
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (ThemeManager.isNightModeOn(this)) {
-            setTheme(R.style.ConnectActivityDark);
+        if (ThemeManager.isLightModeOn(this)) {
+            setTheme(R.style.ScannerActivityLight);
         }
 
         super.onCreate(savedInstanceState);

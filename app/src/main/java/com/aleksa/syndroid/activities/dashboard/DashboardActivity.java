@@ -46,8 +46,8 @@ public class DashboardActivity extends AppCompatActivity implements UnitSelectLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
-        if (ThemeManager.isNightModeOn(this)) {
-            setTheme(R.style.DashboardActivityDark);
+        if (ThemeManager.isLightModeOn(this)) {
+            setTheme(R.style.DashboardActivityLight);
         }
 
         super.onCreate(savedInstanceState);
@@ -166,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements UnitSelectLi
 
     public void switchTheme(View view)
     {
-        ThemeManager.toggleNightMode(this);
+        ThemeManager.toggleTheme(this);
     }
 
     protected void startApp()

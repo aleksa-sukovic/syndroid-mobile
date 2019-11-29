@@ -90,7 +90,7 @@ public class AppDrawer implements DrawerLayout.DrawerListener
         nightModeToggle.setOnClickListener(v -> {
             toggleNightModeButtonResource();
 
-            ThemeManager.toggleNightMode(activity);
+            ThemeManager.toggleTheme(activity);
         });
 
        toggleNightModeButtonResource();
@@ -98,10 +98,10 @@ public class AppDrawer implements DrawerLayout.DrawerListener
 
     private void toggleNightModeButtonResource()
     {
-        if (ThemeManager.isNightModeOn(activity)) {
-            nightModeToggle.setImageResource(R.drawable.ic_dark_mode_off);
-        } else {
+        if (ThemeManager.isLightModeOn(activity)) {
             nightModeToggle.setImageResource(R.drawable.ic_dark_mode_on);
+        } else {
+            nightModeToggle.setImageResource(R.drawable.ic_dark_mode_off);
         }
     }
 

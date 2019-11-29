@@ -20,7 +20,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="@string/app_name"
         android:textAllCaps="false"
-        android:textColor="?attr/accent"
+        android:textColor="?attr/primary_text"
         android:textSize="38sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>

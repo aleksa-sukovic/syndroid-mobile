@@ -106,10 +106,10 @@ public abstract class StateButton extends FrameLayout implements View.OnClickLis
     {
         int backgroundId;
 
-        if (ThemeManager.isNightModeOn(context)) {
-            backgroundId = R.drawable.ic_state_button_dark;
-        } else {
+        if (ThemeManager.isLightModeOn(context)) {
             backgroundId = R.drawable.ic_state_button_light;
+        } else {
+            backgroundId = R.drawable.ic_state_button_dark;
         }
 
         return ContextCompat.getDrawable(context, backgroundId);

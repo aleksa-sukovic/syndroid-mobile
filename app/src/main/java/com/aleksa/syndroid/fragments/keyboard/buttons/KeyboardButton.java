@@ -133,10 +133,10 @@ public abstract class KeyboardButton extends FrameLayout implements View.OnClick
     {
         int backgroundId;
 
-        if (ThemeManager.isNightModeOn(context)) {
-            backgroundId = toggled ? R.drawable.ic_keyboard_button_dark_pressed : R.drawable.ic_keyboard_button_dark;
-        } else {
+        if (ThemeManager.isLightModeOn(context)) {
             backgroundId = toggled ? R.drawable.ic_keyboard_button_light_pressed : R.drawable.ic_keyboard_button_light;
+        } else {
+            backgroundId = toggled ? R.drawable.ic_keyboard_button_dark_pressed : R.drawable.ic_keyboard_button_dark;
         }
 
         return ContextCompat.getDrawable(context, backgroundId);
