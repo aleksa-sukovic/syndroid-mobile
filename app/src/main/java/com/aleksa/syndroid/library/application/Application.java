@@ -1,73 +1,47 @@
 package com.aleksa.syndroid.library.application;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
-import com.aleksa.syndroid.library.bootstrap.Bootstrappable;
-import com.aleksa.syndroid.library.bootstrap.Bootstrapper;
 import com.aleksa.syndroid.library.events.ApplicationEvent;
 import com.aleksa.syndroid.library.exceptions.BaseException;
 import com.aleksa.syndroid.library.exceptions.ExceptionHandler;
 import com.aleksa.syndroid.library.exceptions.SocketExceptionHandler;
-import com.aleksa.syndroid.library.managers.SocketManager;
-import com.aleksa.syndroid.library.router.Route;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.Router;
+import com.aleksa.syndroid.library.router.request.Request;
 import com.aleksa.syndroid.library.sockets.WebSocket;
 import com.aleksa.syndroid.library.sockets.WebSocketListener;
-
+import com.aleksa.syndroid.objects.battery.BatteryServiceProvider;
+import com.aleksa.syndroid.objects.file.FileServiceProvider;
+import com.aleksa.syndroid.objects.utils.UtilsServiceProvider;
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-public class Application implements WebSocketListener, Bootstrappable
+public class Application implements WebSocketListener
 {
-    private static final String      TAG = "Application";
-    private static       Application instance;
-    private Context context;
+    public static final int PORT = 3000;
 
-    private String                                  ip;
-    private int                                     port;
-    private boolean                                 activeConnection;
-    private Map<Bootstrapper.Data, Object>          serviceProviderData;
-    private WebSocket                               webSocket;
-    private SocketManager                           manager;
+    private int port;
+    private String ip;
+    private Router router;
+    private WebSocket webSocket;
+    private boolean activeConnection;
     private ExceptionHandler<BaseException, String> exceptionHandler;
 
     public static Application getInstance(Context context, String ip, int port)
     {
-        instance = new Application(context, ip, port);
-
-        return instance;
-    }
-
-    public static @Nullable Application getInstance()
-    {
-        return instance;
+        return new Application(context, ip, port);
     }
 
     private Application(Context context, String ip, int port)
     {
-        bootstrapApplication();
+        // bootstrap providers
+        Bootstrapper.Bootstrapped data = (new Bootstrapper(getProviders())).bootstrap();
 
+        // initialize application
         this.ip = ip;
         this.port = port;
-        this.context = context;
         this.exceptionHandler = new SocketExceptionHandler();
-    }
-
-    public static int getDefaultPort()
-    {
-        return 3000;
-    }
-
-    private void bootstrapApplication()
-    {
-        this.serviceProviderData = new HashMap<>();
-        Bootstrapper bootstrapper = new Bootstrapper(this);
-        bootstrapper.bootstrap();
+        this.router = new Router(context, data.routes);
     }
 
     public void start()
@@ -77,19 +51,14 @@ public class Application implements WebSocketListener, Bootstrappable
         }
 
         this.webSocket = new WebSocket(ip, port, this);
-        this.manager = new SocketManager(context, (List<Route>) serviceProviderData.get(Bootstrapper.Data.ROUTES));
-
         this.webSocket.connect();
-
         this.activeConnection = true;
     }
 
     public void stop()
     {
-        this.context = null;
-
-        if (this.manager != null) {
-            this.manager.stop();
+        if (router != null) {
+            router.stop();
         }
 
         if (this.webSocket != null) {
@@ -97,39 +66,35 @@ public class Application implements WebSocketListener, Bootstrappable
         }
     }
 
-    public void sendMessage(String message)
+    public void send(Request request, Router.ResponseCallback listener)
     {
-        this.webSocket.sendMessage(message);
+        sendMessage(router.sendRequest(request, listener).toString());
     }
 
-    public void send(OutgoingRequest request)
+    private void sendMessage(String message)
     {
-        String message = manager.prepareOutgoingRequest(request);
-
-        sendMessage(message);
+        this.webSocket.sendMessage(message);
     }
 
     @Override
     public void onOpen()
     {
         activeConnection = true;
-        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_CONNECT, "Successfully connected to server"));
+        EventBus.getDefault().post(
+            new ApplicationEvent(ApplicationEvent.EventCode.SERVER_CONNECT, "Successfully connected to server")
+        );
     }
 
     @Override
     public void onMessage(String message)
     {
-        Log.d(TAG, "onMessage: " + message);
-        try
-        {
-            String response = manager.manage(message);
+        try {
+            String response = router.handle(message);
 
-            if(response != null) {
+            if (response != null) {
                 sendMessage(response);
             }
-        }
-        catch(BaseException e)
-        {
+        } catch (BaseException e) {
             String exception = exceptionHandler.handle(e);
             sendMessage(exception);
         }
@@ -139,21 +104,26 @@ public class Application implements WebSocketListener, Bootstrappable
     public void onClosed()
     {
         activeConnection = false;
-        Log.d(TAG, "onClosed: ");
-        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected"));
+        EventBus.getDefault().post(
+            new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected")
+        );
     }
 
     @Override
     public void onFailure()
     {
         activeConnection = false;
-        Log.d(TAG, "onFailure: application");
-        EventBus.getDefault().post(new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected"));
+        EventBus.getDefault().post(
+            new ApplicationEvent(ApplicationEvent.EventCode.SERVER_DISCONNECT, "Disconnected")
+        );
     }
 
-    @Override
-    public Map<Bootstrapper.Data, Object> serviceProviderData()
+    private List<Class<?>> getProviders()
     {
-        return this.serviceProviderData;
+        return Arrays.asList(
+            FileServiceProvider.class,
+            BatteryServiceProvider.class,
+            UtilsServiceProvider.class
+        );
     }
 }

@@ -1,10 +1,10 @@
 package com.aleksa.syndroid.library.events;
 
-import com.aleksa.syndroid.library.router.response.Response;
+import com.aleksa.syndroid.library.router.request.Request;
 
-public class ResponseEvent extends Event<ResponseEvent.EventCode, Response>
+public class ResponseEvent extends Event<ResponseEvent.EventCode, Request>
 {
-    public ResponseEvent(EventCode eventCode, Response response)
+    public ResponseEvent(EventCode eventCode, Request response)
     {
         super(eventCode, response);
     }

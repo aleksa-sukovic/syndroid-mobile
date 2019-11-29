@@ -1,7 +1,6 @@
 package com.aleksa.syndroid.activities.dashboard.navigation.toolbar;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.aleksa.syndroid.R;

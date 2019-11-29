@@ -1,41 +1,102 @@
 package com.aleksa.syndroid.library.router;
+import android.content.Context;
 
-import android.util.Log;
-
-import com.aleksa.syndroid.library.exceptions.InvalidRouteException;
+import com.aleksa.syndroid.library.controllers.BaseController;
+import com.aleksa.syndroid.library.exceptions.HandlerNotFoundException;
 import com.aleksa.syndroid.library.exceptions.RouteNotFoundException;
-import com.aleksa.syndroid.library.router.request.IncomingRequest;
+import com.aleksa.syndroid.library.exceptions.ValidationException;
+import com.aleksa.syndroid.library.router.request.Request;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Router
 {
     private List<Route> routes;
-    private RouteMatcher matcher;
-    private RouteParser parser;
+    private Context context;
+    private static Map<Long, ResponseCallback> responseListeners;
 
-    public Router(List<Route> routes)
-    {
-        this.routes = routes;
-        this.matcher = new RouteMatcher(routes);
-        this.parser = new RouteParser();
+    static {
+        responseListeners = new HashMap<>();
     }
 
-    public IncomingRequest handle(String routeString) throws InvalidRouteException, RouteNotFoundException
+    public Router(Context context, List<Route> routes)
     {
-        if (!matcher.isValidRoute(routeString)) {
-            throw new InvalidRouteException();
+        this.context = context;
+        this.routes = routes;
+    }
+
+    public Request sendRequest(Request request, ResponseCallback listener)
+    {
+        if (request.expectsResponse() && listener != null) {
+            responseListeners.put(request.getID(), listener);
         }
 
-        Route route = matcher.match(routeString);
-        if (route == null) {
-            route = new Route();
-            throw new RouteNotFoundException(new IncomingRequest(route, parser.parseParams(route, routeString)));
+        return request;
+    }
+
+    public String handle(String data) throws RouteNotFoundException, HandlerNotFoundException, ValidationException
+    {
+        Request request = new Request(new Route(data));
+
+        if (request.typeResponse()) {
+            return this.handleTypeResponse(request);
         }
 
-        Map<String, String> params = parser.parseParams(route, routeString);
+        if (request.typeRequest()) {
+            return this.handleTypeRequest(request);
+        }
 
-        return new IncomingRequest(route, params);
+        return null;
+    }
+
+    private String handleTypeResponse(Request request)
+    {
+        ResponseCallback listener = responseListeners.get(request.getID());
+
+        if (listener != null) {
+            listener.consume(request);
+            responseListeners.remove(request.getID());
+        }
+
+        return null;
+    }
+
+    private String handleTypeRequest(Request request) throws RouteNotFoundException, HandlerNotFoundException, ValidationException
+    {
+        Route foundRoute = this.findRoute(request.getRoute());
+        if (foundRoute == null) {
+            throw new RouteNotFoundException(request);
+        }
+
+        request.setRoute(foundRoute);
+        BaseController controller = request.getRoute().getController();
+        String response = controller.handle(context, request);
+
+        return request.expectsResponse() ? response : null;
+    }
+
+    private Route findRoute(Route route)
+    {
+        for (int i = 0; i < routes.size(); i++) {
+            Route availableRoute = routes.get(i);
+
+            if (availableRoute.match(route)) {
+                return new Route(route.toString(), availableRoute.getControllerName(), availableRoute.getHandler());
+            }
+        }
+
+        return null;
+    }
+
+    public void stop()
+    {
+        context = null;
+    }
+
+    public interface ResponseCallback
+    {
+        void consume(Request response);
     }
 }

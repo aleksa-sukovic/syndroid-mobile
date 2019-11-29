@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.aleksa.syndroid.R;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,7 +39,13 @@ public class MuteButton extends android.support.v7.widget.AppCompatImageView imp
     {
         muted = !muted;
 
-        EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/volume/mute").build());
+        EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/volume/mute")
+                .setType("request")
+                .autoincrement()
+                .build()
+        );
 
         setImage();
     }

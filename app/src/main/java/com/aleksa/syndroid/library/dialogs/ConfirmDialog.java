@@ -1,7 +1,6 @@
-package com.aleksa.syndroid.library.dialogs.confirm;
+package com.aleksa.syndroid.library.dialogs;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -75,12 +74,15 @@ public class ConfirmDialog extends DialogFragment
             return;
         }
 
+        // Title view
         TextView title = view.findViewById(R.id.title);
         title.setText(getArguments().getString("title", "Default Title"));
 
+        // Message view
         TextView message = view.findViewById(R.id.content);
         message.setText(getArguments().getString("message", "Default Message"));
 
+        // Listeners
         TextView confirmBtn = view.findViewById(R.id.confirm_btn);
         confirmBtn.setText(getString(R.string.dialog_confirm_ok_button));
         confirmBtn.setOnClickListener(e -> {
@@ -98,12 +100,15 @@ public class ConfirmDialog extends DialogFragment
             return;
         }
 
+        // Title view
         TextView title = view.findViewById(R.id.title);
         title.setText(getArguments().getString("title", "Default Title"));
 
+        // Message view
         TextView message = view.findViewById(R.id.content);
         message.setText(getArguments().getString("message", "Default Message"));
 
+        // Confirm button
         TextView confirmBtn = view.findViewById(R.id.confirm_btn);
         confirmBtn.setText(getString(R.string.dialog_confirm_confirm_button));
         confirmBtn.setOnClickListener(e -> {
@@ -114,7 +119,7 @@ public class ConfirmDialog extends DialogFragment
             dismiss();
         });
 
-        // dismiss btn
+        // Dismiss button
         TextView dismissBtn = view.findViewById(R.id.dismiss_btn);
         dismissBtn.setText(getString(R.string.dialog_confirm_dismiss_button));
         dismissBtn.setOnClickListener(e -> {

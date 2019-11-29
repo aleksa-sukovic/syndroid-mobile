@@ -4,17 +4,20 @@ public class Promise
 {
     private PromiseResult promiseResult;
 
-    public void resolve(Object object) {
+    public void resolve(Object object)
+    {
         if (promiseResult != null) {
             promiseResult.then(object);
         }
     }
 
-    public void then(PromiseResult promiseResult) {
+    public void then(PromiseResult promiseResult)
+    {
         this.promiseResult = promiseResult;
     }
 
-    public interface PromiseResult {
+    public interface PromiseResult
+    {
         void then(Object object);
     }
 }

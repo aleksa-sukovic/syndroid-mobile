@@ -5,6 +5,6 @@ public class SocketExceptionHandler implements ExceptionHandler<BaseException, S
     @Override
     public String handle(BaseException s)
     {
-        return s.render();
+        return s.render().toString();
     }
 }

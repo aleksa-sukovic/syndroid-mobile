@@ -24,7 +24,6 @@ import java.util.Map;
 
 public class KeyboardFragment extends Fragment implements Wakable
 {
-
     private Map<KeyboardButton, Boolean> modifiers;
 
     {
@@ -48,7 +47,7 @@ public class KeyboardFragment extends Fragment implements Wakable
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onModifierStateChange(KeyboardModifierEvent event)
+    public void handleModifierStateChange(KeyboardModifierEvent event)
     {
         Pair<KeyboardButton, Boolean> pair = event.getData();
 
@@ -72,7 +71,7 @@ public class KeyboardFragment extends Fragment implements Wakable
     }
 
     @Override
-    public void onWakeUp()
+    public void handleWakeUp()
     {
         KeyboardManager.showKeyboard(getContext());
     }

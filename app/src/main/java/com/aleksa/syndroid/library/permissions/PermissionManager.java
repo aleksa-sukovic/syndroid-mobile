@@ -1,10 +1,13 @@
+/*
+   This gist is written by: Aleksa Sukovic (https://github.com/aleksa-sukovic)
+*/
+
 package com.aleksa.syndroid.library.permissions;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-
 import java.util.Random;
 
 public class PermissionManager

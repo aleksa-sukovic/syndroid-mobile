@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.aleksa.syndroid.activities.connect.favourites.adapters.FavouritesAdap
 import com.aleksa.syndroid.activities.connect.favourites.dialogs.EditServerDialog;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.OnFavouritesActionListener;
 import com.aleksa.syndroid.activities.connect.favourites.interfaces.FavouritesSwipeTouchCallback;
-import com.aleksa.syndroid.library.dialogs.confirm.ConfirmDialog;
+import com.aleksa.syndroid.library.dialogs.ConfirmDialog;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
@@ -29,7 +28,6 @@ import java.util.List;
 
 public class FavouritesFragment extends Fragment implements OnFavouritesActionListener
 {
-
     private OnFavouritesSelect listener;
     private ItemTouchHelper    itemTouchHelper;
     private ServerRepository   serverRepository;
@@ -50,12 +48,11 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View layout               = inflater.inflate(R.layout.fragment_favourites, container, false);
+        View layout = inflater.inflate(R.layout.fragment_favourites, container, false);
         recyclerView = layout.findViewById(R.id.recycler_view);
-        placeholderText           = layout.findViewById(R.id.placeholder_text);
+        placeholderText = layout.findViewById(R.id.placeholder_text);
 
         // Adapter creation
         favouritesAdapter = new FavouritesAdapter(new LinkedList<>(), this);
@@ -134,9 +131,7 @@ public class FavouritesFragment extends Fragment implements OnFavouritesActionLi
     @Override
     public void onFavouriteEdit(Server server)
     {
-        EditServerDialog dialog = EditServerDialog.getInstance(server, serverRepository, saved -> {
-            favouritesAdapter.notifyDataSetChanged();
-        });
+        EditServerDialog dialog = EditServerDialog.getInstance(server, serverRepository, saved -> favouritesAdapter.notifyDataSetChanged());
 
         dialog.show(getActivity().getSupportFragmentManager(), "");
     }

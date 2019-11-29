@@ -2,7 +2,6 @@ package com.aleksa.syndroid.fragments.mouse.gesture_manager;
 
 import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -26,7 +25,7 @@ public class GestureManager implements GestureDetector.OnGestureListener, Gestur
     @Override
     public void onShowPress(MotionEvent e)
     {
-
+        //
     }
 
     @Override

@@ -1,23 +1,22 @@
 package com.aleksa.syndroid.library.managers;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.KeyEvent;
-
 import com.aleksa.syndroid.fragments.keyboard.buttons.KeyboardButton;
 import com.aleksa.syndroid.fragments.keyboard.buttons.ShiftButton;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
-
+import com.aleksa.syndroid.library.router.request.Request;
 import java.util.Map;
 
 public class KeyPressManager
 {
-    public OutgoingRequest constructRequest(Context context, int keyCode, KeyEvent event, Map<KeyboardButton, Boolean> modifiers)
+    public Request constructRequest(Context context, int keyCode, KeyEvent event, Map<KeyboardButton, Boolean> modifiers)
     {
         int code = event.getUnicodeChar();
 
-        OutgoingRequest.Builder requestBuilder = new OutgoingRequest.Builder();
-        requestBuilder.setRoutePath("/keyboard/type");
+        Request.Builder requestBuilder = new Request.Builder();
+        requestBuilder.setRouteByPath("/keyboard/type");
+        requestBuilder.autoincrement();
+        requestBuilder.setType("request");
         requestBuilder.addParam("key", Integer.toString(code));
 
         if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT) {
@@ -51,7 +50,7 @@ public class KeyPressManager
         modifiers.remove(shiftButton);
     }
 
-    private void addModifiers(OutgoingRequest.Builder requestBuilder, Map<KeyboardButton,Boolean> modifiers)
+    private void addModifiers(Request.Builder requestBuilder, Map<KeyboardButton,Boolean> modifiers)
     {
         String modifiersString = constructModifiersString(modifiers);
 
@@ -60,19 +59,16 @@ public class KeyPressManager
         }
     }
 
-    private String constructModifiersString(Map<KeyboardButton,Boolean> modifiers)
+    private String constructModifiersString(Map<KeyboardButton, Boolean> modifiers)
     {
         if (modifiers.keySet().size() < 1) {
             return null;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-
-        for(Object o : modifiers.entrySet()) {
-            Map.Entry pair = (Map.Entry) o;
-
-            KeyboardButton button = (KeyboardButton) pair.getKey();
-            Boolean toggled = (Boolean) pair.getValue();
+        for (Map.Entry<KeyboardButton, Boolean> entry : modifiers.entrySet()) {
+            KeyboardButton button = entry.getKey();
+            Boolean toggled = entry.getValue();
 
             if (toggled) {
                 stringBuilder.append(button.getKeyCode());
@@ -84,6 +80,6 @@ public class KeyPressManager
             return null;
         }
 
-        return stringBuilder.toString().substring(0, stringBuilder.length() - 1);
+        return stringBuilder.length() != 0 ? stringBuilder.toString().substring(0, stringBuilder.length() - 1) : null;
     }
 }

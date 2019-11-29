@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aleksa.syndroid.R;
-import com.aleksa.syndroid.library.router.request.OutgoingRequest;
+import com.aleksa.syndroid.library.router.request.Request;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,26 +21,68 @@ public class MediaFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.fragment_media, container, false);
 
-        initializeVolumeButtons(view);
+        initializeButtons(view);
 
         return view;
     }
 
-    private void initializeVolumeButtons(View view)
+    private void initializeButtons(View view)
     {
-        view.findViewById(R.id.volume_down).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/volume/down").build()));
+        view.findViewById(R.id.volume_down).setOnClickListener(v -> EventBus.getDefault().post(
+                new Request.Builder()
+                    .setRouteByPath("/media/volume/down")
+                    .setType("request")
+                    .autoincrement()
+                    .build()
+            ));
 
-        view.findViewById(R.id.volume_up).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/volume/up").build()));
+        view.findViewById(R.id.volume_up).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/volume/up")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
 
-        view.findViewById(R.id.play_button).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/play-pause").build()));
+        view.findViewById(R.id.play_button).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/play-pause")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
 
-        view.findViewById(R.id.media_back).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/back").build()));
+        view.findViewById(R.id.media_back).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/back")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
 
-        view.findViewById(R.id.media_forward).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/forward").build()));
+        view.findViewById(R.id.media_forward).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/forward")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
 
-        view.findViewById(R.id.media_up).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/up").build()));
+        view.findViewById(R.id.media_up).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/up")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
 
-        view.findViewById(R.id.media_down).setOnClickListener(v -> EventBus.getDefault().post(new OutgoingRequest.Builder().setRoutePath("/media/down").build()));
+        view.findViewById(R.id.media_down).setOnClickListener(v -> EventBus.getDefault().post(
+            new Request.Builder()
+                .setRouteByPath("/media/down")
+                .setType("request")
+                .autoincrement()
+                .build()
+        ));
     }
 
 

@@ -1,6 +1,5 @@
-package com.aleksa.syndroid.library.controllers.exceptions;
+package com.aleksa.syndroid.library.exceptions;
 
-import com.aleksa.syndroid.library.exceptions.BaseException;
 import com.aleksa.syndroid.library.router.request.Request;
 
 public class HandlerNotFoundException extends BaseException

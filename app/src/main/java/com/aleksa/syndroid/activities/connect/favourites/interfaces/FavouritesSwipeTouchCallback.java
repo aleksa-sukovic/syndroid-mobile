@@ -6,11 +6,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.aleksa.syndroid.activities.connect.favourites.adapters.ItemTouchHelperAdapter;
 
-public class FavouritesSwipeTouchCallback extends ItemTouchHelper.Callback {
+public class FavouritesSwipeTouchCallback extends ItemTouchHelper.Callback
+{
 
     private final ItemTouchHelperAdapter adapter;
 
-    public FavouritesSwipeTouchCallback(ItemTouchHelperAdapter adapter) {
+    public FavouritesSwipeTouchCallback(ItemTouchHelperAdapter adapter)
+    {
         this.adapter = adapter;
     }
 

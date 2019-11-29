@@ -71,7 +71,9 @@
         android:id="@+id/front_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/primary">
+        android:background="?attr/favourites_item_bg"
+        android:padding="10dp"
+        >
     
         <LinearLayout
             android:id="@+id/content"
@@ -79,8 +81,7 @@
             android:gravity="start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@id/separator"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -105,17 +106,7 @@
                 />
     
         </LinearLayout>
-    
-        <ImageView
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/icons"
-            tools:ignore="ContentDescription"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        
+
         <ImageView
             android:id="@+id/reorder_handle"
             android:layout_width="25dp"

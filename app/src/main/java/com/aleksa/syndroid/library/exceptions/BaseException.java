@@ -22,17 +22,20 @@ public class BaseException extends Exception
         this.request = request;
     }
 
-    public String render()
+    public Request render()
     {
-        String output = "/exception?message=" + message + "&statusCode=" + statusCode;
+        Request.Builder builder = new Request.Builder()
+            .setRouteByPath("/exception")
+            .addParam("message", message)
+            .addParam("statusCode", Integer.toString(statusCode));
 
-        if (request == null) {
-            return output;
+        if (this.request == null) {
+            return builder.build();
         }
 
-        output += "&type=response&request_id=" + request.getId();
-
-        return output;
+        return builder.addParam("type", "response")
+            .addParam("id", Long.toString(request.getID()))
+            .build();
     }
 
     @Override

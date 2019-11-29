@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
 import com.aleksa.syndroid.R;
-
 import com.aleksa.syndroid.activities.connect.favourites.FavouritesFragment;
 import com.aleksa.syndroid.activities.dashboard.DashboardActivity;
 import com.aleksa.syndroid.activities.scanner.ScannerActivity;
@@ -15,17 +13,15 @@ import com.aleksa.syndroid.managers.ThemeManager;
 import com.aleksa.syndroid.objects.server.models.Server;
 import com.aleksa.syndroid.objects.server.repositories.ServerRepository;
 
-
 public class ConnectActivity extends AppCompatActivity implements FavouritesFragment.OnFavouritesSelect
 {
-
     private static final int SCAN_QR_REQUEST_CODE = 321;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (ThemeManager.isNightModeOn(this)) {
-            setTheme(R.style.ConnectActivityDark);
+        if (ThemeManager.isLightModeOn(this)) {
+            setTheme(R.style.ConnectActivityLight);
         }
 
         super.onCreate(savedInstanceState);
@@ -52,11 +48,23 @@ public class ConnectActivity extends AppCompatActivity implements FavouritesFrag
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
-        if (requestCode != SCAN_QR_REQUEST_CODE || resultCode != RESULT_OK) {
+        if (requestCode != SCAN_QR_REQUEST_CODE) {
             return;
         }
 
-        if (data == null || data.getData() == null) {
+        if (resultCode == ScannerActivity.RESULT_ADD_MANUAL) {
+            ServerRepository repository = new ServerRepository(getApplication());
+
+            repository.insert(new Server("192.168.1.1", "New Server"))
+                .then(result -> {
+                    finish();
+                    startActivity(getIntent());
+                });
+
+            return;
+        }
+
+        if (resultCode != RESULT_OK || data == null || data.getData() == null) {
             return;
         }
 
