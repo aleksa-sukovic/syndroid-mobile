@@ -24,7 +24,7 @@ There were few interesting software design principles and techniques I've used i
 By far, the most interesting thing about this project is its communication system. All communication between server and client is done through socket connection.
 
 I've built a "miniature" protocol that describes communication between server and client. If you look at example messages you'll' think that they look a lot like regular HTTP call,and you'd be right since HTTP protocol was my inspiration.
-   
+
     /mouse/move?x=15&y=15
         tells the server to move mouse 15 pixes in both x and y axis
     /mouse/left-click
@@ -52,7 +52,7 @@ Each of the objects controllable by client are defined in a separate file `Servi
 
 ```javascript
 // Example definition of ServiceProvider
- public class UtilsServiceProvider implements ServiceProvider 
+ public class UtilsServiceProvider implements ServiceProvider
  {
     @Override
     public List<Route> getRoutes()
@@ -63,12 +63,12 @@ Each of the objects controllable by client are defined in a separate file `Servi
         );
     }
  }
- 
+
  // ServiceProviderContainer.java
- public class ServiceProviderContainer 
+ public class ServiceProviderContainer
  {
     private List<Class<?>> serviceProviders;
-    
+
     {
         serviceProviders = Arrays.asList(
             UtilsServiceProvider.class,
@@ -76,12 +76,12 @@ Each of the objects controllable by client are defined in a separate file `Servi
         );
     }
 
-    public List<Class<?>> getProviders() 
+    public List<Class<?>> getProviders()
     {
         return serviceProviders;
     }
  }
- 
+
 ```
 
 You can see that when defining custom ServiceProvider you implement interface `ServiceProvider` which defines one method `getRoutes`. You implement that method to return available routes for your object. Each route contains a path, controller and approprate handler method to be invoked when that route is hit.
@@ -92,7 +92,7 @@ You can also validate incoming request by extending BaseValidator class
 
 ```javascript
 // example of validator definition
-public class UtilsValidator extends BaseValidator 
+public class UtilsValidator extends BaseValidator
 {
     {
         this.rules = new LinkedList<>(
@@ -106,15 +106,15 @@ As you can see UtilsValidator class extends BaseValidator and you are required t
 
 ```javascript
 // Example of controller definition
-public class UtilsController extends BaseController 
+public class UtilsController extends BaseController
 {
     {
         validator = new UtilsValidator();
     }
 
-    public String deviceInfo(Context context, IncomingRequest request) 
+    public String deviceInfo(Context context, IncomingRequest request)
     {
-        // implementation    
+        // implementation
     }
 }
 ```
@@ -124,7 +124,11 @@ Finally, we define object controller which gets called once appropriate route ha
 
 ## Images
 
-![Syndroid Mobile Welcome](https://api.pcloud.com/getpubthumb?code=XZmDrK7ZQRPCorcJCx0mT4GMGH3sKXrTnUP7&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Server Dashboard](https://api.pcloud.com/getpubthumb?code=XZ1DrK7ZhDiJJnekyrz3Q2a4Bx9RWpJP8WrV&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Favourites edit](https://api.pcloud.com/getpubthumb?code=XZqDrK7ZjDe9oTOo7VQL6nSMdVw25SxYlHx7&linkpassword=undefined&size=250x650&crop=0&type=auto)
-![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZV1rK7ZHR5YSbp7ukY4UbhFslDzyk7zqyby&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Favourites edit](https://api.pcloud.com/getpubthumb?code=XZ91rK7ZKavRSu9meUH7XuVpUOK8jJQ5jT3k&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZt1rK7ZED1pS7cRJf4pTlk2GwkxfbdcU0zy&linkpassword=undefined&size=250x650&crop=0&type=auto)
-![Syndroid Mobile Favourites edit](https://api.pcloud.com/getpubthumb?code=XZv1rK7ZnHsnSNbk1dHqgyr1LwpO2R9wmwWX&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZyerK7ZMNgMXewmszJSOElxv4NU3RtpWMWk&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Favourites edit](https://api.pcloud.com/getpubthumb?code=XZjerK7ZmDSjrs5JUU5WSUnSsmbNq5lsw7Gk&linkpassword=undefined&size=250x650&crop=0&type=auto) 
-![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZMerK7ZYf2BYAw5qrLpQdSiJyryMJj35EY7&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZm9rK7ZFfiImaipkwjHDRBxzvKqB5N9by3V&linkpassword=undefined&size=250x650&crop=0&type=auto) ![Syndroid Mobile Mouse Controll](https://api.pcloud.com/getpubthumb?code=XZzCrK7ZektpvrJfT6VS9cu3o8mm7XnyoCl7&linkpassword=undefined&size=250x650&crop=0&type=auto)
+<img src="https://drive.google.com/uc?export=view&id=1TTIpPjbMYKAwGFn4A9oSop_vYL0VykJU" width="350">
+<img src="https://drive.google.com/uc?export=view&id=13gPDeoP9iP9zDhRATLUlOcF72WMJGjYv" width="350">
+<img src="https://drive.google.com/uc?export=view&id=1meBonIvHgVwjALtyzZJPFwPCO0dgtUkF" width="350">
+<img src="https://drive.google.com/uc?export=view&id=1j7RKyUXnXjG3C6ig3CmlFZ994FwC794G" width="350">
+<img src="https://drive.google.com/uc?export=view&id=14SZYt6mke8dDoGHwZYo7huLm-1FkpxWD" width="350">
+<img src="https://drive.google.com/uc?export=view&id=1zHVXCNu3T48WSRMoXaSxBNU-k4VeeVg1" width="350">
+<img src="https://drive.google.com/uc?export=view&id=1GDD00G4KdcEZLwbIy546rHH13FxZazrR" width="350">
+<img src="https://drive.google.com/uc?export=view&id=1pejMVkeviF4N3Mf4wjgJveFpD8kNh-1u" width="350">
