@@ -4,24 +4,26 @@
     <color name="tlight_primary">#6F93A6</color>
     <color name="tlight_primary_dark">#96B6C5</color>
     <color name="tlight_primary_light">#B7C9D0</color>
-    <color name="tlight_accent">#EEE0C9</color>
+    <color name="tlight_accent">#523D1D</color>
     <color name="tlight_primary_text">#FFFFFF</color>
     <color name="tlight_secondary_text">#FFFFFF</color>
     <color name="tlight_icons">#FFFFFF</color>
-    <color name="tlight_divider">#E4DECB</color>
-    <color name="tlight_background">#B6B6B6</color>
-    
+    <color name="tlight_divider">#E7E2D2</color>
+    <color name="tlight_background">#DACDBE</color>
+    <color name="tlight_highlight">#423015</color>
+
     <!--Dark colors-->
     <color name="tdark_primary">#223C5B</color>
     <color name="tdark_primary_dark">#091C32</color>
-    <color name="tdark_primary_light">#4A6488</color>
-    <color name="tdark_accent">#52596E</color>
+    <color name="tdark_primary_light">#50688A</color>
+    <color name="tdark_accent">#051527</color>
     <color name="tdark_primary_text">#FFFFFF</color>
     <color name="tdark_secondary_text">#FFFFFF</color>
     <color name="tdark_icons">#FFFFFF</color>
     <color name="tdark_divider">#E2E2E2</color>
-    <color name="tdark_background">#4A6488</color>
-    
+    <color name="tdark_background">#334B6D</color>
+    <color name="tdark_highlight">#051425</color>
+
     <!--Common colors-->
     <color name="success">#68D066</color>
     <color name="warning">#E5D476</color>

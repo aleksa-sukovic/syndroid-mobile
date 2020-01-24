@@ -61,7 +61,7 @@ class BottomNavigation implements AHBottomNavigation.OnTabSelectedListener
     private void configureNavigationView()
     {
         bottomNavigation.setDefaultBackgroundColor(getAttributeColor(R.attr.primary));
-        bottomNavigation.setAccentColor(getAttributeColor(R.attr.primary_dark));
+        bottomNavigation.setAccentColor(getAttributeColor(R.attr.highlight));
         bottomNavigation.setInactiveColor(getAttributeColor(R.attr.icons));
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
         bottomNavigation.setForceTint(false);

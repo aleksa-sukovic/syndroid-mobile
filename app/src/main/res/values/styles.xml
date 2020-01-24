@@ -17,6 +17,7 @@
         <item name="icons">@color/tlight_icons</item>
         <item name="divider">@color/tlight_divider</item>
         <item name="background">@color/tlight_background</item>
+        <item name="highlight">@color/tlight_highlight</item>
         
         <!--Drawables-->
         <item name="connect_btn">@drawable/ic_connect_btn_light</item>
@@ -44,7 +45,8 @@
         <item name="icons">@color/tdark_icons</item>
         <item name="divider">@color/tdark_divider</item>
         <item name="background">@color/tdark_background</item>
-        
+        <item name="highlight">@color/tdark_highlight</item>
+
         <!--Drawables-->
         <item name="connect_btn">@drawable/ic_connect_btn_dark</item>
         <item name="background_image">@drawable/ic_background_dark</item>
