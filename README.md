@@ -120,13 +120,6 @@ public class UtilsController extends BaseController
 Finally, we define object controller which gets called once appropriate route has been hit. BaseController automatically validates incoming request, so we are sure that we won't hit controllers handler method with inappropriate parameters.
 **BaseController uses reflection to dynamically call appropriate handler for incoming request.**
 
-## Images
+## Preview
 
-<img src="https://drive.google.com/uc?export=view&id=1TTIpPjbMYKAwGFn4A9oSop_vYL0VykJU" width="350">
-<img src="https://drive.google.com/uc?export=view&id=13gPDeoP9iP9zDhRATLUlOcF72WMJGjYv" width="350">
-<img src="https://drive.google.com/uc?export=view&id=1meBonIvHgVwjALtyzZJPFwPCO0dgtUkF" width="350">
-<img src="https://drive.google.com/uc?export=view&id=1j7RKyUXnXjG3C6ig3CmlFZ994FwC794G" width="350">
-<img src="https://drive.google.com/uc?export=view&id=14SZYt6mke8dDoGHwZYo7huLm-1FkpxWD" width="350">
-<img src="https://drive.google.com/uc?export=view&id=1zHVXCNu3T48WSRMoXaSxBNU-k4VeeVg1" width="350">
-<img src="https://drive.google.com/uc?export=view&id=1GDD00G4KdcEZLwbIy546rHH13FxZazrR" width="350">
-<img src="https://drive.google.com/uc?export=view&id=1pejMVkeviF4N3Mf4wjgJveFpD8kNh-1u" width="350">
+Screenshots can be found [here](https://ibb.co/album/goZpFa).
