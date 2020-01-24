@@ -9,7 +9,7 @@
     <color name="tlight_secondary_text">#FFFFFF</color>
     <color name="tlight_icons">#FFFFFF</color>
     <color name="tlight_divider">#E4DECB</color>
-    <color name="tlight_background">#F1F0E8</color>
+    <color name="tlight_background">#B6B6B6</color>
     
     <!--Dark colors-->
     <color name="tdark_primary">#223C5B</color>
