@@ -6,9 +6,13 @@ SynDroid is application that allows you, on the one hand, to control your comput
 
  - If you havent already, please read my README file for my [Syndroid Desktop](https://github.com/aleksa-sukovic/syndroid-desktop) project since it is related to this project.
 
-**I'd like to note that both server and desktop applications implement the same protocol, meaning they can both send and receive same types of requests. This was achived with a little more effort here, since project is written in Java insted of JavaScript**
+**Note that both server and desktop applications implement the same protocol, meaning they can both send and receive same types of requests. This was achived with a little more effort here, since project is written in Java insted of JavaScript**
 
-`scroll down to see images`
+# Install
+
+You can download the application from [Google Play store](https://play.google.com/store/apps/details?id=com.aleksa.syndroid).
+
+Screenshots can be found [here](https://ibb.co/album/goZpFa).
 
 ## Technologies
 - Java
@@ -119,7 +123,3 @@ public class UtilsController extends BaseController
 
 Finally, we define object controller which gets called once appropriate route has been hit. BaseController automatically validates incoming request, so we are sure that we won't hit controllers handler method with inappropriate parameters.
 **BaseController uses reflection to dynamically call appropriate handler for incoming request.**
-
-## Preview
-
-Screenshots can be found [here](https://ibb.co/album/goZpFa).
